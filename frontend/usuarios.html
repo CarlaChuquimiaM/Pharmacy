@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Farmacia — Usuarios</title>
+  <link rel="stylesheet" href="css/estilo.css" />
+</head>
+<body>
+  <div class="barra-superior">
+    <div class="titulo">Sistema de Farmacia — Usuarios</div>
+    <nav>
+      <a href="fidelizacion.html">Fidelización</a>
+      <a href="usuarios.html" id="enlace-usuarios" class="oculto">Usuarios</a>
+    </nav>
+    <div class="usuario-info" id="usuario-info"></div>
+  </div>
+
+  <main>
+    <div class="panel">
+      <h2>Crear cajero</h2>
+      <div class="grupo-form">
+        <div>
+          <label for="nuevo-username">Usuario</label>
+          <input type="text" id="nuevo-username" />
+        </div>
+        <div>
+          <label for="nuevo-password">Contraseña</label>
+          <input type="password" id="nuevo-password" />
+        </div>
+        <div>
+          <label for="nuevo-rol">Rol</label>
+          <select id="nuevo-rol">
+            <option value="cajero">Cajero</option>
+            <option value="admin">Administrador</option>
+          </select>
+        </div>
+        <button class="boton-verde" id="boton-crear-usuario">Crear</button>
+      </div>
+      <div class="mensaje-error" id="error-crear-usuario"></div>
+      <div class="mensaje-exito" id="exito-crear-usuario"></div>
+    </div>
+
+    <div class="panel">
+      <h2>Usuarios del sistema</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Usuario</th>
+            <th>Rol</th>
+            <th>Estado</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="cuerpo-usuarios"></tbody>
+      </table>
+    </div>
+  </main>
+
+  <script src="js/api.js"></script>
+  <script src="js/usuarios.js"></script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Farmacia — Fidelización</title>
+  <link rel="stylesheet" href="css/estilo.css" />
+</head>
+<body>
+  <div class="barra-superior">
+    <div class="titulo">Sistema de Farmacia — Fidelización</div>
+    <nav>
+      <a href="fidelizacion.html">Fidelización</a>
+      <a href="usuarios.html" id="enlace-usuarios" class="oculto">Usuarios</a>
+    </nav>
+    <div class="usuario-info" id="usuario-info"></div>
+  </div>
+
+  <main>
+    <div class="panel">
+      <h2>Buscar cliente</h2>
+      <div class="fila-busqueda">
+        <input type="text" id="texto-busqueda" placeholder="Nombre o apellido del cliente..." />
+        <button class="boton-primario" id="boton-buscar" style="width:auto;">Buscar</button>
+      </div>
+      <table id="tabla-resultados">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Teléfono</th>
+            <th>Puntos</th>
+          </tr>
+        </thead>
+        <tbody id="cuerpo-resultados"></tbody>
+      </table>
+      <p id="sin-resultados" class="oculto">No se encontraron clientes con ese nombre.</p>
+    </div>
+
+    <div class="panel oculto" id="panel-cliente-nuevo">
+      <h2>Registrar cliente nuevo</h2>
+      <div class="grupo-form">
+        <div>
+          <label for="nuevo-nombre">Nombre</label>
+          <input type="text" id="nuevo-nombre" />
+        </div>
+        <div>
+          <label for="nuevo-apellido">Apellido</label>
+          <input type="text" id="nuevo-apellido" />
+        </div>
+        <div>
+          <label for="nuevo-telefono">Teléfono (opcional)</label>
+          <input type="text" id="nuevo-telefono" />
+        </div>
+        <button class="boton-verde" id="boton-crear-cliente">Registrar</button>
+      </div>
+      <div class="mensaje-error" id="error-crear-cliente"></div>
+    </div>
+
+    <div class="panel oculto" id="panel-cliente-detalle">
+      <h2>Cliente</h2>
+      <div class="cliente-nombre" id="detalle-nombre"></div>
+      <p id="detalle-telefono" style="color:#4a6572; font-size:13px;"></p>
+
+      <p>Puntos acumulados</p>
+      <div class="puntos-grande" id="detalle-puntos">0</div>
+
+      <hr style="margin:22px 0; border:none; border-top:1px solid var(--gris-borde);" />
+
+      <h2>Sumar puntos por una compra</h2>
+      <div class="grupo-form">
+        <div>
+          <label for="monto-compra">Monto de la compra (Bs)</label>
+          <input type="number" id="monto-compra" min="0" step="0.01" />
+        </div>
+        <button class="boton-verde" id="boton-sumar">Sumar puntos</button>
+      </div>
+      <div class="mensaje-error" id="error-sumar"></div>
+      <div class="mensaje-exito" id="exito-sumar"></div>
+
+      <hr style="margin:22px 0; border:none; border-top:1px solid var(--gris-borde);" />
+
+      <h2>Canjear premio (resetea los puntos a cero)</h2>
+      <div class="grupo-form">
+        <div>
+          <label for="nota-canje">¿Qué premio se entregó?</label>
+          <input type="text" id="nota-canje" placeholder="Ej: mochila" />
+        </div>
+        <button class="boton-rojo" id="boton-canjear">Canjear y resetear</button>
+      </div>
+      <div class="mensaje-error" id="error-canjear"></div>
+      <div class="mensaje-exito" id="exito-canjear"></div>
+
+      <hr style="margin:22px 0; border:none; border-top:1px solid var(--gris-borde);" />
+
+      <h2>Historial reciente</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Tipo</th>
+            <th>Puntos</th>
+            <th>Detalle</th>
+            <th>Cajero</th>
+          </tr>
+        </thead>
+        <tbody id="cuerpo-historial"></tbody>
+      </table>
+    </div>
+  </main>
+
+  <script src="js/api.js"></script>
+  <script src="js/fidelizacion.js"></script>
+</body>
+</html>
