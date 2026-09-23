@@ -216,3 +216,257 @@ tr.fila-clickeable:hover {
   flex: 1;
   min-width: 140px;
 }
+
+
+/* ======================================================
+   FIDELIZACIÓN - DISEÑO CLIENTE + PREMIOS
+====================================================== */
+
+
+.fidelizacion-grid {
+
+  display: grid;
+
+  grid-template-columns: 40% 60%;
+
+  gap: 25px;
+
+  align-items: start;
+
+}
+
+
+
+.zona-cliente {
+
+  padding-right: 20px;
+
+  border-right: 1px solid var(--gris-borde);
+
+}
+
+
+
+.zona-premios {
+
+  padding-left: 5px;
+
+}
+
+
+
+/* ======================================================
+   TARJETAS DE PREMIOS
+====================================================== */
+
+
+.lista-premios {
+
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(180px, 1fr));
+
+  gap: 18px;
+
+}
+
+
+
+.premio-cliente-card {
+
+
+  background: white;
+
+  border: 1px solid var(--gris-borde);
+
+  border-radius: 12px;
+
+  overflow: hidden;
+
+  box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+
+  transition: transform .2s ease;
+
+
+}
+
+
+
+.premio-cliente-card:hover {
+
+  transform: translateY(-3px);
+
+}
+
+
+
+/* Imagen del premio */
+
+
+.imagen-premio {
+
+
+  width: 100%;
+
+  height: 170px;
+
+  object-fit: cover;
+
+  display: block;
+
+}
+
+
+
+.imagen-premio-vacia {
+
+
+  width:100%;
+
+  height:170px;
+
+  background:#eef2f5;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  color:#718096;
+
+  font-size:14px;
+
+}
+
+
+
+/* Contenido tarjeta */
+
+
+.premio-cliente-contenido {
+
+
+  padding:15px;
+
+
+}
+
+
+
+.premio-cliente-contenido h3 {
+
+
+  margin-top:0;
+
+  margin-bottom:8px;
+
+  font-size:16px;
+
+  color:var(--azul-oscuro);
+
+
+}
+
+
+
+.premio-cliente-contenido p {
+
+
+  font-size:14px;
+
+  color:#4a6572;
+
+}
+
+
+
+.puntos-premio {
+
+
+  font-size:16px !important;
+
+  font-weight:700;
+
+  color:var(--verde) !important;
+
+
+}
+
+
+
+.premio-disponible {
+
+
+  color:var(--verde) !important;
+
+  font-weight:700;
+
+}
+
+
+
+.premio-no-disponible {
+
+
+  color:var(--rojo) !important;
+
+  font-weight:700;
+
+}
+
+
+
+.premio-faltan-puntos {
+
+
+  color:#7f8c8d !important;
+
+}
+
+
+
+
+
+.boton-canjear-premio {
+
+
+  width:100%;
+
+  margin-top:10px;
+
+
+}
+
+
+
+
+
+/* ======================================================
+   MEJORAR PANEL HISTORIAL
+====================================================== */
+
+
+.zona-cliente table {
+
+
+  font-size:13px;
+
+
+}
+
+
+
+
+
+/* ======================================================
+   AJUSTE DEL ANCHO GENERAL
+====================================================== */
+
+
+main {
+
+
+  max-width:1200px;
+
+}
