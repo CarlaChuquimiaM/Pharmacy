@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>Biofar — Ventas</title>
+
+  <link
+    rel="stylesheet"
+    href="css/estilo.css"
+  />
+
+</head>
+
+
+<body>
+
+<div class="layout-app">
+
+  <aside class="sidebar" id="sidebar"></aside>
+
+  <div class="area-contenido">
+
+  <main>
+
+
+    <!-- =====================================================
+         ENCABEZADO DE PÁGINA
+    ====================================================== -->
+
+    <section class="cabecera-pagina-premios">
+
+      <div>
+
+        <span class="etiqueta-seccion">
+          Punto de venta Biofar
+        </span>
+
+        <h1>
+          Registrar venta
+        </h1>
+
+        <p>
+          Agrega productos al carrito, asocia un cliente si corresponde
+          y confirma la venta.
+        </p>
+
+      </div>
+
+      <div class="icono-grande-premios">
+        🧾
+      </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         RESUMEN DEL DÍA
+    ====================================================== -->
+
+    <section class="resumen-alertas-productos">
+
+      <div class="tarjeta-alerta">
+        <div class="tarjeta-alerta-icono" style="background:var(--biofar-suave);">🧾</div>
+        <div>
+          <div class="tarjeta-alerta-numero" id="resumen-cantidad-ventas">0</div>
+          <div class="tarjeta-alerta-texto">Ventas de hoy</div>
+        </div>
+      </div>
+
+      <div class="tarjeta-alerta">
+        <div class="tarjeta-alerta-icono" style="background:var(--verde-suave);">💰</div>
+        <div>
+          <div class="tarjeta-alerta-numero" id="resumen-total-vendido">Bs 0.00</div>
+          <div class="tarjeta-alerta-texto">Total vendido hoy</div>
+        </div>
+      </div>
+
+      <div class="tarjeta-alerta">
+        <div class="tarjeta-alerta-icono" style="background:var(--ambar-suave);">📈</div>
+        <div>
+          <div class="tarjeta-alerta-numero" id="resumen-ganancia">Bs 0.00</div>
+          <div class="tarjeta-alerta-texto">Ganancia de hoy</div>
+        </div>
+      </div>
+
+    </section>
+
+
+
+    <div class="fidelizacion-grid">
+
+
+      <!-- =====================================================
+           ZONA IZQUIERDA: BUSCAR PRODUCTOS Y CLIENTE
+      ====================================================== -->
+
+      <div class="zona-cliente">
+
+        <div class="titulo-seccion">
+          <div class="icono-seccion">🔍</div>
+          <div>
+            <h2>Agregar productos</h2>
+            <p>Busca por código o nombre y añade al carrito.</p>
+          </div>
+        </div>
+
+        <div class="campo-formulario">
+          <label for="buscar-producto-venta">Producto</label>
+          <input type="text" id="buscar-producto-venta" placeholder="Código o nombre..." autocomplete="off" />
+        </div>
+
+        <div id="resultados-producto-venta" class="oculto"></div>
+
+        <div class="mensaje-error" id="error-agregar-producto"></div>
+
+
+        <div class="subseccion">
+
+          <div class="subseccion-titulo">
+            <h3>Cliente (opcional)</h3>
+          </div>
+
+          <div class="campo-formulario">
+            <label for="buscar-cliente-venta">Buscar por nombre, apellido o documento</label>
+            <input type="text" id="buscar-cliente-venta" placeholder="Ej: Juan Pérez o 123456" autocomplete="off" />
+          </div>
+
+          <div id="resultados-cliente-venta" class="oculto"></div>
+
+          <div id="cliente-seleccionado-venta" class="oculto"></div>
+
+        </div>
+
+
+        <div class="subseccion">
+
+          <div class="subseccion-titulo">
+            <h3>Método de pago</h3>
+          </div>
+
+          <select id="metodo-pago-venta"></select>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- =====================================================
+           ZONA DERECHA: CARRITO
+      ====================================================== -->
+
+      <div class="zona-premios">
+
+        <div class="cabecera-bloque">
+          <div class="titulo-bloque">
+            <div class="icono-mini">🛒</div>
+            <h2>Carrito</h2>
+          </div>
+        </div>
+
+
+        <div class="tabla-contenedor">
+          <table>
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th>Cant.</th>
+                <th>Precio</th>
+                <th>Subtotal</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="cuerpo-carrito">
+              <tr><td colspan="5">El carrito está vacío.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+
+        <div class="caja-puntos" style="margin-top:18px;">
+          <div class="etiqueta-puntos">Total a cobrar</div>
+          <div class="puntos-grande" id="total-carrito">Bs 0.00</div>
+        </div>
+
+
+        <button
+          type="button"
+          class="boton-primario"
+          id="boton-confirmar-venta"
+          style="width:100%; margin-top:16px;"
+        >
+          Confirmar venta
+        </button>
+
+        <div class="mensaje-error" id="error-confirmar-venta"></div>
+        <div class="mensaje-exito" id="exito-confirmar-venta"></div>
+
+      </div>
+
+    </div>
+
+
+  </main>
+
+
+
+  <footer class="pie-sistema">
+
+    <div class="pie-marca">
+      <img src="img/logo-biofar.png" alt="Farmacia Biofar" />
+      <span>Cuidamos de ti</span>
+    </div>
+
+    <div>
+      Sistema de Fidelización · Farmacia Biofar
+    </div>
+
+  </footer>
+
+  </div>
+
+</div>
+
+
+  <script src="js/api.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/ventas.js"></script>
+  <script>cargarSidebar("ventas");</script>
+
+</body>
+
+</html>

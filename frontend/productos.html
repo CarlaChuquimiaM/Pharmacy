@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>Biofar — Productos</title>
+
+  <link
+    rel="stylesheet"
+    href="css/estilo.css"
+  />
+
+</head>
+
+
+<body>
+
+<div class="layout-app">
+
+  <aside class="sidebar" id="sidebar"></aside>
+
+  <div class="area-contenido">
+
+  <main>
+
+
+    <!-- =====================================================
+         ENCABEZADO DE PÁGINA
+    ====================================================== -->
+
+    <section class="cabecera-pagina-premios">
+
+      <div>
+
+        <span class="etiqueta-seccion">
+          Inventario Biofar
+        </span>
+
+        <h1>
+          Productos e inventario
+        </h1>
+
+        <p>
+          Registra productos, controla el stock y revisa alertas
+          de stock bajo y vencimiento.
+        </p>
+
+      </div>
+
+      <div class="icono-grande-premios">
+        📦
+      </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         RESUMEN DE ALERTAS
+    ====================================================== -->
+
+    <section class="resumen-alertas-productos">
+
+      <div class="tarjeta-alerta tarjeta-alerta-stock">
+        <div class="tarjeta-alerta-icono">⚠️</div>
+        <div>
+          <div class="tarjeta-alerta-numero" id="contador-stock-bajo">0</div>
+          <div class="tarjeta-alerta-texto">Productos con stock bajo</div>
+        </div>
+      </div>
+
+      <div class="tarjeta-alerta tarjeta-alerta-vencidos">
+        <div class="tarjeta-alerta-icono">⛔</div>
+        <div>
+          <div class="tarjeta-alerta-numero" id="contador-vencidos">0</div>
+          <div class="tarjeta-alerta-texto">Productos vencidos</div>
+        </div>
+      </div>
+
+      <div class="tarjeta-alerta tarjeta-alerta-por-vencer">
+        <div class="tarjeta-alerta-icono">⏳</div>
+        <div>
+          <div class="tarjeta-alerta-numero" id="contador-por-vencer">0</div>
+          <div class="tarjeta-alerta-texto">Por vencer (30 días)</div>
+        </div>
+      </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         CREAR PRODUCTO
+    ====================================================== -->
+
+    <section class="panel panel-crear-usuario">
+
+      <div class="titulo-seccion">
+
+        <div class="icono-seccion">
+          +
+        </div>
+
+        <div>
+
+          <h2>
+            Registrar producto
+          </h2>
+
+          <p>
+            Ingresa el precio de compra y el % de ganancia:
+            el precio de venta se calcula automáticamente.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="formulario-grid-3">
+
+        <div>
+          <label for="producto-codigo">Código</label>
+          <input type="text" id="producto-codigo" placeholder="Ej: P001" autocomplete="off" />
+        </div>
+
+        <div>
+          <label for="producto-nombre">Nombre</label>
+          <input type="text" id="producto-nombre" placeholder="Ej: Paracetamol 500mg" autocomplete="off" />
+        </div>
+
+        <div>
+          <label for="producto-marca">Marca</label>
+          <input type="text" id="producto-marca" placeholder="Ej: Genfar" autocomplete="off" />
+        </div>
+
+        <div>
+          <label for="producto-precio-compra">Precio de compra (Bs)</label>
+          <input type="number" id="producto-precio-compra" min="0" step="0.01" placeholder="Ej: 10.00" />
+        </div>
+
+        <div>
+          <label for="producto-porcentaje">% de ganancia</label>
+          <input type="number" id="producto-porcentaje" min="0" step="0.01" placeholder="Ej: 20" />
+        </div>
+
+        <div>
+          <label>Precio de venta (Bs)</label>
+          <input type="text" id="producto-precio-venta-preview" disabled placeholder="Se calcula solo" />
+        </div>
+
+        <div>
+          <label for="producto-stock">Stock inicial</label>
+          <input type="number" id="producto-stock" min="0" step="1" placeholder="Ej: 50" />
+        </div>
+
+        <div>
+          <label for="producto-stock-minimo">Stock mínimo</label>
+          <input type="number" id="producto-stock-minimo" min="0" step="1" placeholder="Ej: 5" />
+        </div>
+
+        <div>
+          <label for="producto-vencimiento">Fecha de vencimiento</label>
+          <input type="date" id="producto-vencimiento" />
+          <span class="campo-ayuda">Déjalo vacío si el producto no vence.</span>
+        </div>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="boton-primario"
+        id="boton-crear-producto"
+        style="margin-top:18px;"
+      >
+        + Registrar producto
+      </button>
+
+      <div class="mensaje-error" id="error-crear-producto"></div>
+      <div class="mensaje-exito" id="exito-crear-producto"></div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         EDITAR PRODUCTO
+    ====================================================== -->
+
+    <section class="panel panel-crear-usuario oculto" id="panel-editar-producto">
+
+      <div class="titulo-seccion">
+
+        <div class="icono-seccion">
+          ✎
+        </div>
+
+        <div>
+          <h2>Editar producto</h2>
+          <p>Actualiza la información del producto seleccionado.</p>
+        </div>
+
+      </div>
+
+      <input type="hidden" id="editar-producto-id" />
+
+      <div class="formulario-grid-3">
+
+        <div>
+          <label for="editar-producto-codigo">Código</label>
+          <input type="text" id="editar-producto-codigo" />
+        </div>
+
+        <div>
+          <label for="editar-producto-nombre">Nombre</label>
+          <input type="text" id="editar-producto-nombre" />
+        </div>
+
+        <div>
+          <label for="editar-producto-marca">Marca</label>
+          <input type="text" id="editar-producto-marca" />
+        </div>
+
+        <div>
+          <label for="editar-producto-precio-compra">Precio de compra (Bs)</label>
+          <input type="number" id="editar-producto-precio-compra" min="0" step="0.01" />
+        </div>
+
+        <div>
+          <label for="editar-producto-porcentaje">% de ganancia</label>
+          <input type="number" id="editar-producto-porcentaje" min="0" step="0.01" />
+        </div>
+
+        <div>
+          <label>Precio de venta (Bs)</label>
+          <input type="text" id="editar-producto-precio-venta-preview" disabled />
+        </div>
+
+        <div>
+          <label for="editar-producto-stock">Stock</label>
+          <input type="number" id="editar-producto-stock" min="0" step="1" />
+        </div>
+
+        <div>
+          <label for="editar-producto-stock-minimo">Stock mínimo</label>
+          <input type="number" id="editar-producto-stock-minimo" min="0" step="1" />
+        </div>
+
+        <div>
+          <label for="editar-producto-vencimiento">Fecha de vencimiento</label>
+          <input type="date" id="editar-producto-vencimiento" />
+        </div>
+
+      </div>
+
+      <div class="acciones-edicion" style="margin-top:18px;">
+        <button type="button" class="boton-primario" id="boton-guardar-producto">
+          Guardar cambios
+        </button>
+
+        <button type="button" class="boton-secundario" id="boton-cancelar-editar-producto">
+          Cancelar
+        </button>
+      </div>
+
+      <div class="mensaje-error" id="error-editar-producto"></div>
+      <div class="mensaje-exito" id="exito-editar-producto"></div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         LISTADO DE PRODUCTOS
+    ====================================================== -->
+
+    <section class="panel panel-usuarios-sistema">
+
+      <div class="cabecera-listado-usuarios">
+
+        <div>
+
+          <div class="titulo-bloque">
+            <div class="icono-mini">📦</div>
+            <h2>Catálogo de productos</h2>
+          </div>
+
+          <p class="texto-ayuda">
+            Busca por código, nombre o marca.
+          </p>
+
+        </div>
+
+        <div style="min-width:240px;">
+          <input
+            type="text"
+            id="buscar-producto"
+            placeholder="Buscar producto..."
+            autocomplete="off"
+          />
+        </div>
+
+      </div>
+
+
+      <div class="tabla-usuarios-contenedor">
+
+        <table class="tabla-usuarios">
+
+          <thead>
+            <tr>
+              <th>Código</th>
+              <th>Producto</th>
+              <th>Marca</th>
+              <th>Precio venta</th>
+              <th>Stock</th>
+              <th>Vencimiento</th>
+              <th class="columna-acciones">Acciones</th>
+            </tr>
+          </thead>
+
+          <tbody id="cuerpo-productos"></tbody>
+
+        </table>
+
+      </div>
+
+    </section>
+
+
+  </main>
+
+
+
+  <footer class="pie-sistema">
+
+    <div class="pie-marca">
+      <img src="img/logo-biofar.png" alt="Farmacia Biofar" />
+      <span>Cuidamos de ti</span>
+    </div>
+
+    <div>
+      Sistema de Fidelización · Farmacia Biofar
+    </div>
+
+  </footer>
+
+  </div>
+
+</div>
+
+
+  <script src="js/api.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/productos.js"></script>
+  <script>cargarSidebar("productos");</script>
+
+</body>
+
+</html>

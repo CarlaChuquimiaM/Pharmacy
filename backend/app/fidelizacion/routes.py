@@ -6,7 +6,7 @@ from flask import Blueprint, current_app, jsonify, request
 from flask_login import current_user, login_required
 
 from ..extensions import db
-from ..models import Cliente, MovimientoPuntos, Premio
+from ..models import Cliente, MovimientoPuntos, Premio, Venta
 
 
 fidelizacion_bp = Blueprint("fidelizacion", __name__)
@@ -418,6 +418,18 @@ def detalle_cliente(cliente_id):
         .all()
     )
 
+    compras = (
+        Venta.query
+        .filter_by(
+            cliente_id=cliente.id
+        )
+        .order_by(
+            Venta.fecha.desc()
+        )
+        .limit(50)
+        .all()
+    )
+
     datos = cliente_a_dict(
         cliente
     )
@@ -429,7 +441,98 @@ def detalle_cliente(cliente_id):
         for movimiento in historial
     ]
 
+    datos["compras"] = [
+        {
+            "id": venta.id,
+            "total": float(venta.total),
+            "metodo_pago": venta.metodo_pago.nombre if venta.metodo_pago else None,
+            "cantidad_items": len(venta.detalles),
+            "fecha": venta.fecha.isoformat(),
+        }
+        for venta in compras
+    ]
+
     return jsonify(datos)
+
+
+# ======================================================
+# EDITAR CLIENTE
+# ======================================================
+
+@fidelizacion_bp.put(
+    "/clientes/<int:cliente_id>"
+)
+@login_required
+def editar_cliente(cliente_id):
+    cliente = Cliente.query.get_or_404(cliente_id)
+    datos = request.get_json(silent=True) or {}
+
+    tipo_documento = (
+        datos.get("tipo_documento") or cliente.tipo_documento
+    ).strip().upper()
+
+    numero_documento = (
+        datos.get("numero_documento") or cliente.numero_documento
+    ).strip()
+
+    nombre = (datos.get("nombre") or "").strip()
+    apellido = (datos.get("apellido") or "").strip() or None
+    telefono = (datos.get("telefono") or "").strip() or None
+
+    if tipo_documento not in ("CI", "NIT"):
+        return jsonify({"error": "Tipo de documento no válido"}), 400
+
+    if not numero_documento:
+        return jsonify({"error": "El CI o NIT es obligatorio"}), 400
+
+    if not nombre:
+        return jsonify({"error": "El nombre es obligatorio"}), 400
+
+    duplicado = Cliente.query.filter(
+        Cliente.tipo_documento == tipo_documento,
+        Cliente.numero_documento == numero_documento,
+        Cliente.id != cliente.id,
+    ).first()
+
+    if duplicado:
+        return jsonify({
+            "error": "Ya existe otro cliente registrado con este documento"
+        }), 409
+
+    cliente.tipo_documento = tipo_documento
+    cliente.numero_documento = numero_documento
+    cliente.nombre = nombre
+    cliente.apellido = apellido
+    cliente.telefono = telefono
+    cliente.modificado_por_id = current_user.id
+    cliente.modificado_en = datetime.utcnow()
+
+    db.session.commit()
+
+    return jsonify(cliente_a_dict(cliente))
+
+
+# ======================================================
+# DESACTIVAR CLIENTE
+# ======================================================
+
+@fidelizacion_bp.delete(
+    "/clientes/<int:cliente_id>"
+)
+@login_required
+def desactivar_cliente(cliente_id):
+    cliente = Cliente.query.get_or_404(cliente_id)
+
+    if not cliente.activo:
+        return jsonify({"error": "Este cliente ya está desactivado"}), 400
+
+    cliente.activo = False
+    cliente.modificado_por_id = current_user.id
+    cliente.modificado_en = datetime.utcnow()
+
+    db.session.commit()
+
+    return jsonify({"mensaje": "Cliente desactivado correctamente"})
 
 
 # ======================================================

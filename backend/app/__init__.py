@@ -6,7 +6,7 @@ from flask_login import current_user
 from sqlalchemy import text
 
 from .extensions import db, login_manager
-from .models import Usuario
+from .models import MetodoPago, Usuario
 
 
 FRONTEND_DIR = (
@@ -111,6 +111,9 @@ def create_app():
 
     from .auth.routes import auth_bp
     from .fidelizacion.routes import fidelizacion_bp
+    from .productos.routes import productos_bp
+    from .ventas.routes import ventas_bp
+    from .reportes.routes import reportes_bp
 
     app.register_blueprint(
         auth_bp,
@@ -120,6 +123,21 @@ def create_app():
     app.register_blueprint(
         fidelizacion_bp,
         url_prefix="/api/fidelizacion"
+    )
+
+    app.register_blueprint(
+        productos_bp,
+        url_prefix="/api/productos"
+    )
+
+    app.register_blueprint(
+        ventas_bp,
+        url_prefix="/api/ventas"
+    )
+
+    app.register_blueprint(
+        reportes_bp,
+        url_prefix="/api/reportes"
     )
 
 
@@ -160,6 +178,44 @@ def create_app():
 
 
         # ----------------------------------------------
+        # MIGRACIÓN LIGERA: columnas nuevas en tablas ya existentes
+        # (no hay Alembic; create_all() no altera tablas existentes)
+        # ----------------------------------------------
+
+        with db.engine.connect() as conexion:
+            columnas_usuarios = [
+                fila[1]
+                for fila in conexion.execute(
+                    text("PRAGMA table_info(usuarios)")
+                )
+            ]
+
+            if columnas_usuarios and "debe_cambiar_password" not in columnas_usuarios:
+                conexion.execute(
+                    text(
+                        "ALTER TABLE usuarios ADD COLUMN "
+                        "debe_cambiar_password BOOLEAN NOT NULL DEFAULT 0"
+                    )
+                )
+                conexion.commit()
+
+            columnas_movimientos = [
+                fila[1]
+                for fila in conexion.execute(
+                    text("PRAGMA table_info(movimientos_puntos)")
+                )
+            ]
+
+            if columnas_movimientos and "venta_id" not in columnas_movimientos:
+                conexion.execute(
+                    text(
+                        "ALTER TABLE movimientos_puntos ADD COLUMN venta_id INTEGER"
+                    )
+                )
+                conexion.commit()
+
+
+        # ----------------------------------------------
         # CREAR ADMIN INICIAL
         # ----------------------------------------------
 
@@ -184,6 +240,19 @@ def create_app():
 
             print(
                 "Usuario administrador inicial creado."
+            )
+
+
+        # ----------------------------------------------
+        # MÉTODO DE PAGO POR DEFECTO
+        # ----------------------------------------------
+
+        if MetodoPago.query.first() is None:
+            db.session.add(MetodoPago(nombre="Efectivo"))
+            db.session.commit()
+
+            print(
+                "Método de pago inicial (Efectivo) creado."
             )
 
 

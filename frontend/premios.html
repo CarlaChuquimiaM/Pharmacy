@@ -12,72 +12,11 @@
 
 <body>
 
-  <!-- =====================================================
-       CABECERA BIOFAR
-  ====================================================== -->
+<div class="layout-app">
 
-  <header class="barra-superior">
+  <aside class="sidebar" id="sidebar"></aside>
 
-    <div class="marca-biofar">
-
-      <img
-        src="img/logo-biofar.png"
-        alt="Farmacia Biofar"
-        class="logo-biofar"
-      />
-
-      <div class="separador-marca"></div>
-
-      <div class="nombre-sistema">
-        Sistema de Fidelización
-      </div>
-
-    </div>
-
-
-<nav class="menu-principal">
-
-  <a href="fidelizacion.html">
-    <span class="menu-icono">
-      <img src="img/usuario.svg" alt="">
-    </span>
-    Fidelización
-  </a>
-
-
-  <a
-    href="premios.html"
-    id="enlace-premios"
-    class="oculto menu-activo"
-  >
-    <span class="menu-icono">
-      <img src="img/regalo.svg" alt="">
-    </span>
-    Premios
-  </a>
-
-
-  <a
-    href="usuarios.html"
-    id="enlace-usuarios"
-    class="oculto"
-  >
-    <span class="menu-icono">
-      <img src="img/grupo.svg" alt="">
-    </span>
-    Usuarios
-  </a>
-
-</nav>
-
-    <div
-      class="usuario-info"
-      id="usuario-info"
-    ></div>
-
-  </header>
-
-
+  <div class="area-contenido">
 
   <main>
 
@@ -617,10 +556,16 @@
 
   </footer>
 
+  </div>
+
+</div>
+
 
 
   <script src="js/api.js"></script>
+  <script src="js/layout.js"></script>
   <script src="js/premios.js"></script>
+  <script>cargarSidebar("premios");</script>
 
 </body>
 
