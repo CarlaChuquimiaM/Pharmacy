@@ -1,6 +1,8 @@
+from datetime import timedelta
 from pathlib import Path
 
-from flask import Flask, send_from_directory
+from flask import Flask, jsonify, request, send_from_directory
+from flask_login import current_user
 from sqlalchemy import text
 
 from .extensions import db, login_manager
@@ -21,13 +23,23 @@ DB_PATH = (
 UPLOADS_DIR = Path(__file__).resolve().parent.parent / "uploads"
 PREMIOS_UPLOAD_DIR = UPLOADS_DIR / "premios"
 
+# Tiempo de inactividad antes de que la sesión se cierre sola.
+DURACION_SESION = timedelta(minutes=20)
+
+# Rutas de /api que se pueden usar aunque el usuario todavía deba cambiar su contraseña.
+RUTAS_LIBRES_CAMBIO_PASSWORD = {
+    "/api/auth/login",
+    "/api/auth/logout",
+    "/api/auth/me",
+    "/api/auth/cambiar-password",
+}
+
 
 def create_app():
-    
-    app = Flask(
-        __name__,
-        static_folder=None
-    )
+    app = Flask(__name__, static_folder=None)
+    app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{DB_PATH}"
+    app.config["SECRET_KEY"] = "cambiar-esta-clave-en-produccion"
+    app.config["PERMANENT_SESSION_LIFETIME"] = DURACION_SESION
 
     app.config[
         "SQLALCHEMY_DATABASE_URI"
@@ -81,6 +93,21 @@ def create_app():
     # ==================================================
     # BLUEPRINTS
     # ==================================================
+
+    @app.before_request
+    def exigir_cambio_password():
+        if not request.path.startswith("/api/"):
+            return None
+        if request.path in RUTAS_LIBRES_CAMBIO_PASSWORD:
+            return None
+        if current_user.is_authenticated and current_user.debe_cambiar_password:
+            return jsonify(
+                {
+                    "error": "Debes cambiar tu contraseña antes de continuar",
+                    "debe_cambiar_password": True,
+                }
+            ), 403
+        return None
 
     from .auth.routes import auth_bp
     from .fidelizacion.routes import fidelizacion_bp

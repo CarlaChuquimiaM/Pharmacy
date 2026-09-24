@@ -48,6 +48,12 @@ frontend/
 - **Blueprints por módulo**: cada área de negocio (productos, ventas, clientes, fidelización, reportes) es un blueprint con su propio `routes.py`, montado bajo `/api/<módulo>`. Seguir el mismo patrón de `auth/` y `fidelizacion/` al agregar `productos/`, `ventas/`, etc.
 - **Frontend**: una página `.html` + un `.js` por módulo, sin mezclar lógica de varios módulos en un mismo archivo JS. `apiFetch()` ya maneja sesión expirada (redirige a `index.html` en 401) y errores (lee `{"error": "..."}` del backend) — no reimplementar eso en cada página.
 
+## Autenticación: detalles que hay que respetar al tocar otros módulos
+
+- `Usuario.debe_cambiar_password` (default `True`) fuerza que cualquier usuario nuevo, o cualquiera al que el admin le resetee la clave, tenga que definir una contraseña propia antes de usar el resto del sistema. Esto se aplica con un `before_request` global en `app/__init__.py` (`exigir_cambio_password`) que bloquea cualquier ruta `/api/...` que no esté en `RUTAS_LIBRES_CAMBIO_PASSWORD`. **Si se agrega un blueprint nuevo, no hace falta tocar nada ahí** — el bloqueo ya cubre cualquier ruta bajo `/api/`, solo hay que agregar la ruta a esa lista blanca si en algún momento se necesita otra excepción.
+- La sesión expira sola a los 20 minutos de inactividad (`DURACION_SESION` en `app/__init__.py`, más `session.permanent = True` en el login). Es manejo de sesión del lado del servidor vía cookie, no un timer en JavaScript — no hay nada que mantener en el frontend para que esto funcione.
+- En el frontend, `apiFetch()` (en `js/api.js`) ya intercepta el 403 con `debe_cambiar_password: true` y redirige sola a `cambiar-password.html`. Cualquier página nueva que use `apiFetch()` hereda este comportamiento automáticamente, no hay que replicarlo.
+
 ## Cómo correr en local para desarrollar
 
 ```bash

@@ -8,6 +8,8 @@ Primera parte funcionando del sistema completo (ver `/home/carlita/.claude/plans
 - Acumulación de puntos por compra (1 Bs = 1 punto, se ingresa el monto manualmente)
 - Consulta de puntos por cliente
 - Canje de premio: reinicia los puntos a cero y guarda una nota de qué se entregó
+- Cambio de contraseña obligatorio en el primer ingreso (y cada vez que el admin resetea la clave de alguien)
+- Cierre de sesión automático tras 20 minutos sin actividad
 
 Funciona en red: una PC hace de servidor, las demás PCs de la farmacia lo usan desde el navegador.
 
@@ -26,7 +28,9 @@ Funciona en red: una PC hace de servidor, las demás PCs de la farmacia lo usan 
 - Usuario: `admin`
 - Contraseña: `admin123`
 
-Entrar como admin, ir a "Usuarios" y crear un usuario por cada cajero. Se recomienda luego cambiar la contraseña del admin (por ahora se cambia creando el usuario admin de nuevo con otra clave desde esa misma pantalla, o pidiendo el cambio para la próxima entrega).
+Al entrar por primera vez, el sistema obliga a definir una contraseña nueva antes de dejar hacer cualquier otra cosa. Después de eso, ir a "Usuarios" y crear un usuario por cada cajero — esos usuarios también deberán cambiar su contraseña la primera vez que entren.
+
+Si el admin resetea la contraseña de alguien (botón "Resetear contraseña" en la pantalla de Usuarios), esa persona vuelve a tener que cambiarla en su próximo ingreso.
 
 ## Uso desde las otras PCs
 

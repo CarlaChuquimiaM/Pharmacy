@@ -80,6 +80,13 @@ async function apiFetch(ruta, opciones = {}) {
     .catch(() => ({}));
 
 
+  if (respuesta.status === 403 && datos.debe_cambiar_password) {
+    if (!window.location.pathname.endsWith("cambiar-password.html")) {
+      window.location.href = "cambiar-password.html";
+    }
+    throw new Error(datos.error || "Debes cambiar tu contraseña");
+  }
+
   if (!respuesta.ok) {
 
     throw new Error(

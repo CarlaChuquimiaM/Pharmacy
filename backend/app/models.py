@@ -10,6 +10,10 @@ class Usuario(db.Model, UserMixin):
     __tablename__ = "usuarios"
 
     id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(50), unique=True, nullable=False)
+    password_hash = db.Column(db.String(255), nullable=False)
+    rol = db.Column(db.String(20), nullable=False)  # "admin" o "cajero"
+    debe_cambiar_password = db.Column(db.Boolean, default=True, nullable=False)
 
     username = db.Column(
         db.String(50),

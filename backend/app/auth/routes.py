@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, session
 from flask_login import current_user, login_required, login_user, logout_user
 
 from ..extensions import db
@@ -15,6 +15,7 @@ def usuario_a_dict(usuario):
         "username": usuario.username,
         "rol": usuario.rol,
         "activo": usuario.activo,
+        "debe_cambiar_password": usuario.debe_cambiar_password,
     }
 
 
@@ -37,6 +38,7 @@ def login():
         return jsonify({"error": "Este usuario está inhabilitado"}), 403
 
     login_user(usuario)
+    session.permanent = True
     return jsonify(usuario_a_dict(usuario))
 
 
@@ -105,9 +107,32 @@ def actualizar_usuario(usuario_id):
 
     if datos.get("password"):
         usuario.set_password(datos["password"])
+        usuario.debe_cambiar_password = True
 
     usuario.modificado_por_id = current_user.id
     usuario.modificado_en = datetime.utcnow()
 
     db.session.commit()
     return jsonify(usuario_a_dict(usuario))
+
+
+@auth_bp.post("/cambiar-password")
+@login_required
+def cambiar_password():
+    datos = request.get_json(silent=True) or {}
+    password_actual = datos.get("password_actual") or ""
+    password_nueva = datos.get("password_nueva") or ""
+
+    if not current_user.check_password(password_actual):
+        return jsonify({"error": "La contraseña actual no es correcta"}), 400
+
+    if len(password_nueva) < 6:
+        return jsonify({"error": "La nueva contraseña debe tener al menos 6 caracteres"}), 400
+
+    current_user.set_password(password_nueva)
+    current_user.debe_cambiar_password = False
+    current_user.modificado_por_id = current_user.id
+    current_user.modificado_en = datetime.utcnow()
+
+    db.session.commit()
+    return jsonify(usuario_a_dict(current_user))
