@@ -1,440 +1,2775 @@
+/* =========================================================
+   BIOFAR — SISTEMA DE FIDELIZACIÓN
+========================================================= */
+
 :root {
-  --azul-oscuro: #1f3b5c;
-  --azul: #2980b9;
-  --verde: #27ae60;
-  --rojo: #c0392b;
-  --gris-claro: #f4f6f8;
-  --gris-borde: #d9e2ec;
+
+  /* MARCA BIOFAR */
+  --biofar: #67A8DC;
+  --biofar-oscuro: #3186BD;
+  --biofar-profundo: #173F63;
+  --biofar-suave: #EAF5FC;
+  --biofar-muy-suave: #F5FAFE;
+
+  /* SISTEMA */
+  --blanco: #FFFFFF;
+  --fondo: #F4F8FB;
+  --texto: #173750;
+  --texto-secundario: #698296;
+
+  --borde: #DCE8F1;
+
+  --verde: #2CAF6F;
+  --verde-suave: #E8F7EF;
+
+  --rojo: #DA5656;
+  --rojo-suave: #FDECEC;
+
+  --sombra:
+    0 5px 24px rgba(35, 86, 119, 0.07);
+
 }
+
+
+/* =========================================================
+   GENERAL
+========================================================= */
 
 * {
   box-sizing: border-box;
 }
 
+
+html {
+  min-height: 100%;
+}
+
+
 body {
+
   margin: 0;
-  font-family: "Segoe UI", Arial, sans-serif;
-  background: var(--gris-claro);
-  color: #1c2b36;
-}
 
-.pantalla-login {
   min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
+  font-family:
+    "Segoe UI",
+    Inter,
+    Arial,
+    sans-serif;
+
+  background:
+    linear-gradient(
+      180deg,
+      #F8FCFF 0%,
+      #F3F8FB 100%
+    );
+
+  color: var(--texto);
+
 }
 
-.tarjeta-login {
-  background: white;
-  padding: 40px;
-  border-radius: 10px;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
-  width: 320px;
+
+button,
+input,
+select {
+  font-family: inherit;
 }
 
-.tarjeta-login h1 {
-  font-size: 20px;
-  color: var(--azul-oscuro);
-  margin-bottom: 25px;
-  text-align: center;
-}
-
-label {
-  display: block;
-  font-size: 13px;
-  font-weight: 600;
-  margin: 12px 0 5px;
-  color: #4a6572;
-}
-
-input, select {
-  width: 100%;
-  padding: 9px 10px;
-  border: 1px solid var(--gris-borde);
-  border-radius: 6px;
-  font-size: 14px;
-}
 
 button {
   cursor: pointer;
-  border: none;
-  border-radius: 6px;
-  padding: 10px 16px;
-  font-size: 14px;
-  font-weight: 600;
 }
 
-.boton-primario {
-  background: var(--azul);
-  color: white;
-  width: 100%;
-  margin-top: 18px;
-}
-
-.boton-verde {
-  background: var(--verde);
-  color: white;
-}
-
-.boton-rojo {
-  background: var(--rojo);
-  color: white;
-}
-
-.boton-secundario {
-  background: white;
-  color: var(--azul-oscuro);
-  border: 1px solid var(--gris-borde);
-}
-
-.mensaje-error {
-  color: var(--rojo);
-  font-size: 13px;
-  margin-top: 10px;
-  min-height: 16px;
-}
-
-.mensaje-exito {
-  color: var(--verde);
-  font-size: 13px;
-  margin-top: 10px;
-  min-height: 16px;
-}
-
-.barra-superior {
-  background: white;
-  border-bottom: 1px solid var(--gris-borde);
-  padding: 14px 30px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.barra-superior .titulo {
-  font-weight: 700;
-  color: var(--azul-oscuro);
-  font-size: 17px;
-}
-
-.barra-superior nav a {
-  margin-right: 16px;
-  color: var(--azul-oscuro);
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.barra-superior .usuario-info {
-  font-size: 13px;
-  color: #4a6572;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-main {
-  max-width: 900px;
-  margin: 30px auto;
-  padding: 0 20px;
-}
-
-.panel {
-  background: white;
-  border-radius: 10px;
-  padding: 24px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-  margin-bottom: 20px;
-}
-
-.panel h2 {
-  margin-top: 0;
-  font-size: 16px;
-  color: var(--azul-oscuro);
-}
-
-.fila-busqueda {
-  display: flex;
-  gap: 10px;
-}
-
-.fila-busqueda input {
-  flex: 1;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 12px;
-}
-
-th, td {
-  text-align: left;
-  padding: 9px 8px;
-  border-bottom: 1px solid var(--gris-borde);
-  font-size: 14px;
-}
-
-th {
-  color: #4a6572;
-  font-size: 12px;
-  text-transform: uppercase;
-}
-
-tr.fila-clickeable {
-  cursor: pointer;
-}
-
-tr.fila-clickeable:hover {
-  background: #f0f6fb;
-}
-
-.puntos-grande {
-  font-size: 38px;
-  font-weight: 800;
-  color: var(--verde);
-}
-
-.cliente-nombre {
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--azul-oscuro);
-}
 
 .oculto {
   display: none !important;
 }
 
-.grupo-form {
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.barra-superior {
+
+  min-height: 88px;
+
+  background:
+    rgba(255,255,255,0.98);
+
+  border-bottom:
+    1px solid var(--borde);
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(300px, 1fr)
+    auto
+    minmax(220px, 1fr);
+
+  align-items: center;
+
+  padding:
+    0 42px;
+
+  position: sticky;
+
+  top: 0;
+
+  z-index: 50;
+
+  box-shadow:
+    0 3px 14px rgba(36, 84, 116, .04);
+
+}
+
+
+/* MARCA */
+
+.marca-biofar {
+
   display: flex;
+
+  align-items: center;
+
+  gap: 17px;
+
+}
+
+
+.logo-biofar {
+
+  width: 170px;
+
+  max-height: 62px;
+
+  object-fit: contain;
+
+}
+
+
+.separador-marca {
+
+  height: 34px;
+
+  width: 1px;
+
+  background: var(--borde);
+
+}
+
+
+.nombre-sistema {
+
+  color: var(--biofar-profundo);
+
+  font-weight: 700;
+
+  font-size: 15px;
+
+  white-space: nowrap;
+
+}
+
+
+/* =========================================================
+   NAVEGACIÓN
+========================================================= */
+
+.menu-principal {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
   gap: 10px;
-  align-items: flex-end;
-  flex-wrap: wrap;
-}
 
-.grupo-form > div {
-  flex: 1;
-  min-width: 140px;
 }
 
 
-/* ======================================================
-   FIDELIZACIÓN - DISEÑO CLIENTE + PREMIOS
-====================================================== */
+.menu-principal a {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  color: #49677E;
+
+  text-decoration: none;
+
+  font-size: 14px;
+
+  font-weight: 650;
+
+  padding:
+    12px 17px;
+
+  border-radius: 10px;
+
+  transition:
+    background .2s ease,
+    color .2s ease;
+
+}
 
 
-.fidelizacion-grid {
+.menu-principal a:hover {
+
+  color: var(--biofar-oscuro);
+
+  background: var(--biofar-muy-suave);
+
+}
+
+
+.menu-principal .menu-activo {
+
+  color: var(--biofar-oscuro);
+
+  background: var(--biofar-suave);
+
+  box-shadow:
+    0 3px 11px rgba(103,168,220,.14);
+
+}
+
+
+.menu-icono {
+
+  font-size: 17px;
+
+}
+
+
+/* =========================================================
+   USUARIO
+========================================================= */
+
+.usuario-info {
+
+  justify-self: end;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  color: #567186;
+
+  font-size: 13px;
+
+}
+
+
+.usuario-info button {
+
+  background: white;
+
+  color: var(--biofar-profundo);
+
+  border:
+    1px solid var(--biofar);
+
+  padding:
+    10px 18px;
+
+  border-radius: 9px;
+
+  font-weight: 650;
+
+  transition: .2s ease;
+
+}
+
+
+.usuario-info button:hover {
+
+  background: var(--biofar-suave);
+
+}
+
+
+/* =========================================================
+   CONTENIDO
+========================================================= */
+
+main {
+
+  width: min(
+    calc(100% - 48px),
+    1420px
+  );
+
+  margin:
+    32px auto 55px;
+
+}
+
+
+/* =========================================================
+   PANEL
+========================================================= */
+
+.panel {
+
+  background: var(--blanco);
+
+  border:
+    1px solid rgba(210,226,237,.75);
+
+  border-radius: 16px;
+
+  padding: 28px;
+
+  box-shadow: var(--sombra);
+
+  margin-bottom: 22px;
+
+}
+
+
+.panel h2 {
+
+  margin: 0;
+
+  color: var(--biofar-profundo);
+
+  font-size: 19px;
+
+  font-weight: 750;
+
+}
+
+
+.panel p {
+
+  line-height: 1.55;
+
+}
+
+
+/* =========================================================
+   TÍTULOS
+========================================================= */
+
+.titulo-seccion {
+
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 13px;
+
+  margin-bottom: 23px;
+
+}
+
+
+.titulo-seccion p {
+
+  color: var(--texto-secundario);
+
+  margin:
+    6px 0 0;
+
+  font-size: 14px;
+
+}
+
+
+.icono-seccion {
+
+  width: 30px;
+
+  height: 30px;
+
+  flex-shrink: 0;
+
+  border-radius: 11px;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  background: var(--biofar-suave);
+
+  color: var(--biofar-oscuro);
+
+  font-size: 19px;
+
+
+}
+
+
+/* =========================================================
+   FORMULARIOS
+========================================================= */
+
+label {
+
+  display: block;
+
+  color: #456176;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  margin-bottom: 7px;
+
+}
+
+
+input,
+select {
+
+  width: 100%;
+
+  height: 43px;
+
+  border:
+    1px solid #CDDFEB;
+
+  background: white;
+
+  border-radius: 9px;
+
+  padding:
+    0 13px;
+
+  font-size: 14px;
+
+  color: var(--texto);
+
+  outline: none;
+
+  transition:
+    border .2s ease,
+    box-shadow .2s ease;
+
+}
+
+
+input::placeholder {
+  color: #A0B3C2;
+}
+
+
+input:focus,
+select:focus {
+
+  border-color: var(--biofar);
+
+  box-shadow:
+    0 0 0 3px rgba(103,168,220,.14);
+
+}
+
+
+/* =========================================================
+   BUSCADOR
+========================================================= */
+
+.panel-busqueda {
+
+  position: relative;
+
+  overflow: hidden;
+
+}
+
+
+.panel-busqueda::after {
+
+  content: "+";
+
+  position: absolute;
+
+  right: -22px;
+
+  bottom: -115px;
+
+  font-size: 360px;
+
+  font-weight: 900;
+
+  line-height: 1;
+
+  color: rgba(103,168,220,.055);
+
+  pointer-events: none;
+
+}
+
+
+.busqueda-cliente {
+
+  position: relative;
+
+  z-index: 2;
 
   display: grid;
 
-  grid-template-columns: 40% 60%;
-
-  gap: 25px;
-
-  align-items: start;
-
-}
-
-
-
-.zona-cliente {
-
-  padding-right: 20px;
-
-  border-right: 1px solid var(--gris-borde);
-
-}
-
-
-
-.zona-premios {
-
-  padding-left: 5px;
-
-}
-
-
-
-/* ======================================================
-   TARJETAS DE PREMIOS
-====================================================== */
-
-
-.lista-premios {
-
-  display: grid;
-
-  grid-template-columns: repeat(2, minmax(180px, 1fr));
+  grid-template-columns:
+    1fr 1fr;
 
   gap: 18px;
 
 }
 
 
+.boton-buscar {
 
-.premio-cliente-card {
+  position: relative;
 
+  z-index: 2;
 
-  background: white;
+  width: 100%;
 
-  border: 1px solid var(--gris-borde);
-
-  border-radius: 12px;
-
-  overflow: hidden;
-
-  box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-
-  transition: transform .2s ease;
-
+  margin-top: 18px;
 
 }
 
+
+/* =========================================================
+   BOTONES
+========================================================= */
+
+button {
+
+  border: none;
+
+  min-height: 42px;
+
+  padding:
+    10px 18px;
+
+  border-radius: 9px;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  transition:
+    transform .15s ease,
+    background .2s ease,
+    box-shadow .2s ease;
+
+}
+
+
+button:active {
+
+  transform:
+    translateY(1px);
+
+}
+
+
+.boton-primario {
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--biofar),
+      var(--biofar-oscuro)
+    );
+
+  color: white;
+
+  box-shadow:
+    0 5px 12px rgba(49,134,189,.16);
+
+}
+
+
+.boton-primario:hover {
+
+  background:
+    linear-gradient(
+      135deg,
+      #5A9DD3,
+      #297CAD
+    );
+
+}
+
+
+.boton-verde {
+
+  background: var(--biofar-oscuro);
+
+  color: white;
+
+}
+
+
+.boton-verde:hover {
+
+  background: #2879AA;
+
+}
+
+
+.boton-rojo {
+
+  background: var(--rojo);
+
+  color: white;
+
+}
+
+
+.boton-secundario {
+
+  background: white;
+
+  color: var(--biofar-profundo);
+
+  border:
+    1px solid var(--borde);
+
+}
+
+
+/* =========================================================
+   MENSAJES
+========================================================= */
+
+.mensaje-error {
+
+  color: var(--rojo);
+
+  font-size: 13px;
+
+  margin-top: 10px;
+
+  min-height: 16px;
+
+}
+
+
+.mensaje-exito {
+
+  color: var(--verde);
+
+  font-size: 13px;
+
+  margin-top: 10px;
+
+  min-height: 16px;
+
+}
+
+
+/* =========================================================
+   GRUPOS
+========================================================= */
+
+.grupo-form {
+
+  display: flex;
+
+  gap: 15px;
+
+  align-items: flex-end;
+
+  flex-wrap: wrap;
+
+}
+
+
+.grupo-form > div {
+
+  flex: 1;
+
+  min-width: 160px;
+
+}
+
+
+.documento-detectado {
+
+  display: inline-flex;
+
+  gap: 6px;
+
+  padding:
+    9px 12px;
+
+  background: var(--biofar-suave);
+
+  color: var(--biofar-profundo);
+
+  border-radius: 8px;
+
+  margin-bottom: 15px;
+
+  font-size: 13px;
+
+}
+
+
+/* =========================================================
+   DETALLE FIDELIZACIÓN
+========================================================= */
+
+.panel-detalle {
+
+  padding: 0;
+
+  overflow: hidden;
+
+}
+
+
+.fidelizacion-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(440px, .92fr)
+    minmax(550px, 1.3fr);
+
+  gap: 0;
+
+}
+
+
+.zona-cliente {
+
+  padding: 27px;
+
+  border-right:
+    1px solid var(--borde);
+
+}
+
+
+.zona-premios {
+
+  padding: 27px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #FFFFFF,
+      #FCFEFF
+    );
+
+}
+
+
+/* =========================================================
+   CABECERAS INTERNAS
+========================================================= */
+
+.cabecera-bloque,
+.cabecera-premios {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  margin-bottom: 18px;
+
+}
+
+
+.titulo-bloque {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+}
+
+
+.titulo-bloque h2 {
+
+  margin: 0;
+
+}
+
+
+.icono-mini {
+
+  width: 32px;
+
+  height: 32px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 9px;
+
+  color: var(--biofar-oscuro);
+
+  background: var(--biofar-suave);
+
+}
+
+
+.enlace-catalogo {
+
+  text-decoration: none;
+
+  color: var(--biofar-oscuro);
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+}
+
+
+/* =========================================================
+   TARJETA CLIENTE
+========================================================= */
+
+.tarjeta-cliente {
+
+  display: grid;
+
+  grid-template-columns:
+    auto 1fr auto;
+
+  align-items: center;
+
+  gap: 16px;
+
+  padding:
+    18px 0 22px;
+
+  border-bottom:
+    1px solid var(--borde);
+
+}
+
+
+.avatar-cliente {
+
+  width: 64px;
+
+  height: 64px;
+
+  border-radius: 50%;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  background: var(--biofar-suave);
+
+  color: var(--biofar);
+
+  font-size: 28px;
+
+}
+
+
+.cliente-nombre {
+
+  font-size: 18px;
+
+  font-weight: 750;
+
+  color: var(--biofar-profundo);
+
+  margin-bottom: 7px;
+
+}
+
+
+.datos-cliente p {
+
+  color: var(--texto-secundario) !important;
+
+  font-size: 13px !important;
+
+  margin:
+    4px 0 !important;
+
+}
+
+
+.caja-puntos {
+
+  min-width: 150px;
+
+  padding:
+    14px 18px;
+
+  border-radius: 12px;
+
+  text-align: center;
+
+  background:
+    linear-gradient(
+      135deg,
+      #EDF8FF,
+      #DFF1FC
+    );
+
+}
+
+
+.etiqueta-puntos {
+
+  display: block;
+
+  color: var(--biofar-oscuro);
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+}
+
+
+.puntos-grande {
+
+  color: #187FC1;
+
+  font-size: 31px;
+
+  font-weight: 800;
+
+  margin-top: 3px;
+
+}
+
+
+/* =========================================================
+   SUBSECCIONES
+========================================================= */
+
+.subseccion {
+
+  padding-top: 22px;
+
+}
+
+
+.subseccion + .subseccion {
+
+  margin-top: 20px;
+
+  border-top:
+    1px solid var(--borde);
+
+}
+
+
+.subseccion-titulo h3 {
+
+  color: var(--biofar-profundo);
+
+  font-size: 16px;
+
+  margin:
+    0 0 5px;
+
+}
+
+
+.texto-ayuda {
+
+  color: var(--texto-secundario);
+
+  font-size: 13px;
+
+}
+
+
+.registro-compra {
+
+  display: grid;
+
+  grid-template-columns:
+    1fr auto;
+
+  align-items: end;
+
+  gap: 10px;
+
+}
+
+
+/* =========================================================
+   PREMIOS
+========================================================= */
+
+.lista-premios {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(190px,1fr)
+    );
+
+  gap: 15px;
+
+  margin-top: 20px;
+
+}
+
+
+.premio-cliente-card {
+
+  display: flex;
+
+  flex-direction: column;
+
+  background: white;
+
+  border:
+    1px solid var(--borde);
+
+  border-radius: 14px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 4px 15px rgba(32,80,112,.055);
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease;
+
+}
 
 
 .premio-cliente-card:hover {
 
-  transform: translateY(-3px);
+  transform:
+    translateY(-3px);
+
+  box-shadow:
+    0 10px 25px rgba(42,99,137,.10);
 
 }
-
-
-
-/* Imagen del premio */
 
 
 .imagen-premio {
 
+  width: calc(100% - 20px);
 
-  width: 100%;
+  margin:
+    10px 10px 0;
 
-  height: 170px;
+  height: 165px;
 
-  object-fit: cover;
+  object-fit: contain;
 
-  display: block;
+  border-radius: 10px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #F7FBFE,
+      #EFF7FC
+    );
 
 }
-
 
 
 .imagen-premio-vacia {
 
+  margin: 10px;
 
-  width:100%;
+  width:
+    calc(100% - 20px);
 
-  height:170px;
+  height: 165px;
 
-  background:#eef2f5;
+  display: flex;
 
-  display:flex;
+  align-items: center;
 
-  align-items:center;
+  justify-content: center;
 
-  justify-content:center;
+  border-radius: 10px;
 
-  color:#718096;
+  background: #F0F6FA;
 
-  font-size:14px;
+  color: #8297A6;
+
+  font-size: 13px;
 
 }
-
-
-
-/* Contenido tarjeta */
 
 
 .premio-cliente-contenido {
 
+  flex: 1;
 
-  padding:15px;
+  display: flex;
 
+  flex-direction: column;
+
+  padding: 13px;
 
 }
-
 
 
 .premio-cliente-contenido h3 {
 
+  margin:
+    0 0 6px;
 
-  margin-top:0;
+  font-size: 15px;
 
-  margin-bottom:8px;
-
-  font-size:16px;
-
-  color:var(--azul-oscuro);
-
+  color: var(--biofar-profundo);
 
 }
-
 
 
 .premio-cliente-contenido p {
 
+  color: var(--texto-secundario);
 
-  font-size:14px;
+  font-size: 13px;
 
-  color:#4a6572;
+  margin:
+    4px 0;
 
 }
-
 
 
 .puntos-premio {
 
+  display: block;
 
-  font-size:16px !important;
+  background: var(--biofar-suave);
 
-  font-weight:700;
+  color:
+    var(--biofar-oscuro) !important;
 
-  color:var(--verde) !important;
+  font-weight: 750;
 
+  text-align: center;
+
+  padding:
+    8px;
+
+  border-radius: 8px;
+
+  margin-top: auto !important;
 
 }
-
 
 
 .premio-disponible {
 
+  color:
+    var(--verde) !important;
 
-  color:var(--verde) !important;
-
-  font-weight:700;
+  font-weight: 700;
 
 }
-
 
 
 .premio-no-disponible {
 
+  color:
+    var(--rojo) !important;
 
-  color:var(--rojo) !important;
-
-  font-weight:700;
+  font-weight: 700;
 
 }
-
 
 
 .premio-faltan-puntos {
 
-
-  color:#7f8c8d !important;
+  color:
+    #8998A3 !important;
 
 }
-
-
-
 
 
 .boton-canjear-premio {
 
+  width: 100%;
 
-  width:100%;
+  margin-top: 10px;
 
-  margin-top:10px;
+  background:
+    linear-gradient(
+      135deg,
+      var(--biofar),
+      var(--biofar-oscuro)
+    );
 
+  color: white;
+
+}
+
+
+.estado-vacio {
+
+  grid-column: 1 / -1;
+
+  padding:
+    35px 20px;
+
+  text-align: center;
+
+  background: var(--biofar-muy-suave);
+
+  color: var(--texto-secundario);
+
+  border-radius: 12px;
+
+  border:
+    1px dashed #C9DFEC;
+
+}
+
+
+/* =========================================================
+   TABLAS
+========================================================= */
+
+.tabla-contenedor {
+
+  overflow-x: auto;
+
+}
+
+
+table {
+
+  width: 100%;
+
+  border-collapse: collapse;
+
+  margin-top: 12px;
+
+}
+
+
+th,
+td {
+
+  text-align: left;
+
+  padding:
+    11px 9px;
+
+  border-bottom:
+    1px solid var(--borde);
+
+  font-size: 13px;
+
+}
+
+
+th {
+
+  color: #71899A;
+
+  font-size: 11px;
+
+  text-transform: uppercase;
+
+  letter-spacing: .03em;
+
+  font-weight: 700;
+
+}
+
+
+tbody tr {
+
+  transition:
+    background .15s ease;
+
+}
+
+
+tbody tr:hover {
+
+  background: #F7FBFE;
+
+}
+
+
+tr.fila-clickeable {
+
+  cursor: pointer;
+
+}
+
+
+/* =========================================================
+   PIE
+========================================================= */
+
+.pie-sistema {
+
+  width: 100%;
+
+  min-height: 72px;
+
+  padding:
+    15px 42px;
+
+  background: white;
+
+  border-top:
+    1px solid var(--borde);
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  color: #8397A6;
+
+  font-size: 12px;
+
+}
+
+
+.pie-marca {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+}
+
+
+.pie-marca img {
+
+  width: 110px;
+
+}
+
+
+.pie-marca span {
+
+  color: var(--biofar);
+
+  font-weight: 650;
+
+  font-style: italic;
+
+}
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+.pantalla-login {
+
+  min-height: 100vh;
+
+  display: grid;
+
+  place-items: center;
+
+  position: relative;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      135deg,
+      #F8FCFF 0%,
+      #EDF7FD 100%
+    );
+
+}
+
+
+.pantalla-login::before {
+
+  content: "+";
+
+  position: absolute;
+
+  right: 3%;
+
+  bottom: -20%;
+
+  font-size: 700px;
+
+  line-height: 1;
+
+  font-weight: 900;
+
+  color:
+    rgba(103,168,220,.07);
+
+}
+
+
+.tarjeta-login {
+
+  position: relative;
+
+  z-index: 2;
+
+  width: min(
+    420px,
+    calc(100% - 35px)
+  );
+
+  padding: 38px;
+
+  background: white;
+
+  border:
+    1px solid var(--borde);
+
+  border-radius: 18px;
+
+  box-shadow:
+    0 16px 45px rgba(38,93,129,.12);
+
+}
+
+
+.login-logo {
+
+  display: block;
+
+  max-width: 190px;
+
+  margin:
+    0 auto 22px;
+
+}
+
+
+.tarjeta-login h1 {
+
+  color: var(--biofar-profundo);
+
+  text-align: center;
+
+  font-size: 20px;
+
+  margin:
+    0 0 6px;
+
+}
+
+
+.login-subtitulo {
+
+  text-align: center;
+
+  color: var(--texto-secundario);
+
+  font-size: 13px;
+
+  margin-bottom: 27px;
+
+}
+
+
+/* =========================================================
+   PREMIOS ADMIN
+========================================================= */
+
+#lista-premios-admin {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fill,
+      minmax(220px,1fr)
+    );
+
+  gap: 18px;
+
+}
+
+
+/* =========================================================
+   RESPONSIVE BÁSICO
+========================================================= */
+
+@media(max-width:1050px) {
+
+  .barra-superior {
+
+    grid-template-columns: 1fr;
+
+    gap: 15px;
+
+    padding: 18px 25px;
+
+  }
+
+
+  .marca-biofar {
+
+    justify-content: center;
+
+  }
+
+
+  .usuario-info {
+
+    justify-self: center;
+
+  }
+
+
+  .fidelizacion-grid {
+
+    grid-template-columns: 1fr;
+
+  }
+
+
+  .zona-cliente {
+
+    border-right: 0;
+
+    border-bottom:
+      1px solid var(--borde);
+
+  }
+
+}
+
+
+@media(max-width:700px) {
+
+  main {
+
+    width:
+      calc(100% - 24px);
+
+  }
+
+
+  .busqueda-cliente {
+
+    grid-template-columns: 1fr;
+
+  }
+
+
+  .lista-premios {
+
+    grid-template-columns: 1fr;
+
+  }
+
+
+  .tarjeta-cliente {
+
+    grid-template-columns: 1fr;
+
+  }
+
+
+  .caja-puntos {
+
+    text-align: left;
+
+  }
+
+
+  .menu-principal {
+
+    flex-wrap: wrap;
+
+  }
+
+
+  .registro-compra {
+
+    grid-template-columns: 1fr;
+
+  }
+
+
+  .pie-sistema {
+
+    flex-direction: column;
+
+    gap: 14px;
+
+    text-align: center;
+
+  }
+
+}
+
+
+/* =========================================================
+   PÁGINA DE PREMIOS BIOFAR
+========================================================= */
+
+.cabecera-pagina-premios {
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 22px;
+
+  padding: 8px 4px 4px;
+}
+
+
+.cabecera-pagina-premios h1 {
+
+  margin: 7px 0 6px;
+
+  font-size: 30px;
+
+  color: var(--biofar-profundo);
+
+  letter-spacing: -.02em;
+}
+
+
+.cabecera-pagina-premios p {
+
+  margin: 0;
+
+  color: var(--texto-secundario);
+
+  font-size: 14px;
+}
+
+
+.etiqueta-seccion {
+
+  display: inline-block;
+
+  padding: 6px 11px;
+
+  border-radius: 999px;
+
+  background: var(--biofar-suave);
+
+  color: var(--biofar-oscuro);
+
+  font-size: 12px;
+
+  font-weight: 750;
+}
+
+
+.icono-grande-premios {
+
+  width: 76px;
+  height: 76px;
+
+  border-radius: 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    linear-gradient(
+      145deg,
+      #ECF7FE,
+      #DDEFFC
+    );
+
+  font-size: 32px;
+
+  box-shadow:
+    0 8px 25px rgba(103,168,220,.13);
+}
+
+
+
+/* =========================================================
+   FORMULARIO DE PREMIOS
+========================================================= */
+
+.panel-premio-formulario {
+
+  position: relative;
+
+  overflow: hidden;
+}
+
+
+.panel-premio-formulario::after {
+
+  content: "+";
+
+  position: absolute;
+
+  right: -45px;
+  bottom: -155px;
+
+  font-size: 420px;
+
+  font-weight: 900;
+
+  line-height: 1;
+
+  color: rgba(103,168,220,.035);
+
+  pointer-events: none;
+}
+
+
+.premio-form-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.5fr)
+    minmax(280px, .65fr);
+
+  gap: 34px;
+
+  align-items: start;
+
+  position: relative;
+
+  z-index: 2;
+}
+
+
+.premio-form-campos {
+
+  min-width: 0;
+}
+
+
+.premio-form-dos-columnas {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 16px 18px;
+
+  align-items: start;
+}
+
+
+.premio-form-dos-columnas > div {
+
+  min-width: 0;
+}
+
+
+.campo-imagen-premio {
+
+  margin-top: 20px;
+}
+
+
+.campo-imagen-premio input[type="file"] {
+
+  height: auto;
+
+  padding: 10px;
+
+  background: #FAFCFE;
+}
+
+
+.boton-crear-premio {
+
+  margin-top: 20px;
+
+  min-width: 190px;
+}
+
+
+
+/* =========================================================
+   VISTA PREVIA
+========================================================= */
+
+.premio-vista-previa {
+
+  position: sticky;
+
+  top: 115px;
+}
+
+
+.premio-preview-box {
+
+  background:
+    linear-gradient(
+      180deg,
+      #F9FCFE 0%,
+      #F1F8FC 100%
+    );
+
+  border: 1px solid var(--borde);
+
+  border-radius: 16px;
+
+  padding: 16px;
+
+  box-shadow:
+    0 5px 18px rgba(38,87,117,.06);
+}
+
+
+.premio-preview-titulo {
+
+  color: var(--biofar-profundo);
+
+  font-size: 13px;
+
+  font-weight: 750;
+
+  margin-bottom: 11px;
+}
+
+
+.premio-preview-imagen {
+
+  height: 250px;
+
+  border-radius: 13px;
+
+  overflow: hidden;
+
+  background: white;
+
+  border:
+    1px solid #DDEAF2;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+}
+
+
+.premio-preview-imagen img {
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+
+  display: block;
+}
+
+
+.preview-placeholder {
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 10px;
+
+  color: #94A8B7;
+
+  text-align: center;
+
+  font-size: 13px;
+
+  padding: 20px;
+}
+
+
+.preview-placeholder-icono {
+
+  width: 52px;
+  height: 52px;
+
+  border-radius: 14px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background: var(--biofar-suave);
+
+  font-size: 24px;
+}
+
+
+.preview-info {
+
+  padding-top: 14px;
+}
+
+
+.preview-info p {
+
+  margin: 8px 0 0;
+
+  color: var(--texto-secundario);
+
+  font-size: 12px;
+
+  line-height: 1.5;
+}
+
+
+.preview-chip {
+
+  display: inline-flex;
+
+  padding: 6px 10px;
+
+  border-radius: 999px;
+
+  background: white;
+
+  color: var(--biofar-oscuro);
+
+  border:
+    1px solid #D8EAF5;
+
+  font-size: 11px;
+
+  font-weight: 750;
+}
+
+
+
+/* =========================================================
+   CATÁLOGO DE PREMIOS
+========================================================= */
+
+.cabecera-catalogo {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: flex-start;
+
+  gap: 20px;
+
+  margin-bottom: 20px;
+}
+
+
+.catalogo-resumen {
+
+  padding: 7px 11px;
+
+  border-radius: 9px;
+
+  background: var(--biofar-suave);
+
+  color: var(--biofar-oscuro);
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+
+.catalogo-premios-admin,
+#lista-premios-admin {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fill, minmax(230px, 1fr));
+
+  gap: 18px;
+}
+
+
+
+/* =========================================================
+   ESTADO DE CARGA
+========================================================= */
+
+.estado-cargando-premios {
+
+  grid-column: 1 / -1;
+
+  min-height: 160px;
+
+  border:
+    1px dashed #C8DFEC;
+
+  border-radius: 14px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background: var(--biofar-muy-suave);
+
+  color: var(--texto-secundario);
+}
+
+
+.estado-cargando-icono {
+
+  font-size: 29px;
+
+  margin-bottom: 5px;
+}
+
+
+
+/* =========================================================
+   TARJETAS ADMIN GENERADAS POR JS
+   Estas reglas también ayudarán si premios.js ya crea cards.
+========================================================= */
+
+.premio-card,
+.premio-admin-card {
+
+  background: white;
+
+  border:
+    1px solid var(--borde);
+
+  border-radius: 15px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 4px 16px rgba(35,86,119,.06);
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease;
+}
+
+
+.premio-card:hover,
+.premio-admin-card:hover {
+
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 10px 28px rgba(35,86,119,.10);
+}
+
+
+.premio-card img,
+.premio-admin-card img {
+
+  width: 100%;
+
+  height: 190px;
+
+  object-fit: contain;
+
+  background:
+    linear-gradient(
+      145deg,
+      #F8FCFE,
+      #EEF7FC
+    );
+}
+
+
+.premio-card-contenido,
+.premio-admin-contenido {
+
+  padding: 15px;
+}
+
+
+.premio-card h3,
+.premio-admin-card h3 {
+
+  margin: 0 0 7px;
+
+  color: var(--biofar-profundo);
+
+  font-size: 16px;
+}
+
+
+.premio-card p,
+.premio-admin-card p {
+
+  color: var(--texto-secundario);
+
+  font-size: 13px;
+
+  margin: 5px 0;
+}
+
+
+.premio-card button,
+.premio-admin-card button {
+
+  margin-top: 9px;
+}
+
+
+
+/* =========================================================
+   PANEL EDICIÓN
+========================================================= */
+
+.panel-editar-premio {
+
+  border:
+    1px solid rgba(103,168,220,.30);
+
+  box-shadow:
+    0 8px 30px rgba(49,134,189,.10);
+}
+
+
+.acciones-edicion {
+
+  display: flex;
+
+  gap: 10px;
+
+  margin-top: 20px;
+}
+
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width: 950px) {
+
+  .premio-form-grid {
+
+    grid-template-columns: 1fr;
+  }
+
+
+  .premio-vista-previa {
+
+    position: static;
+  }
+
+
+  .premio-preview-box {
+
+    max-width: 420px;
+  }
+
+}
+
+
+@media(max-width: 650px) {
+
+  .premio-form-dos-columnas {
+
+    grid-template-columns: 1fr;
+  }
+
+
+  .cabecera-pagina-premios {
+
+    align-items: flex-start;
+  }
+
+
+  .icono-grande-premios {
+
+    display: none;
+  }
+
+
+  .cabecera-catalogo {
+
+    flex-direction: column;
+  }
+
+
+  .acciones-edicion {
+
+    flex-direction: column;
+  }
+
+}
+
+
+/* =========================================================
+   CATÁLOGO ADMIN — PREMIOS BIOFAR
+========================================================= */
+
+.catalogo-premios-admin,
+#lista-premios-admin {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fill, minmax(245px, 1fr));
+
+  gap: 20px;
+}
+
+
+/* TARJETA */
+
+.premio-admin-card {
+
+  background: white;
+
+  border:
+    1px solid var(--borde);
+
+  border-radius: 17px;
+
+  overflow: hidden;
+
+  display: flex;
+
+  flex-direction: column;
+
+  box-shadow:
+    0 5px 18px rgba(35,86,119,.065);
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease,
+    border-color .2s ease;
+}
+
+
+.premio-admin-card:hover {
+
+  transform:
+    translateY(-4px);
+
+  border-color:
+    rgba(103,168,220,.45);
+
+  box-shadow:
+    0 12px 30px rgba(35,86,119,.11);
+}
+
+
+
+/* =========================================================
+   IMAGEN
+========================================================= */
+
+.premio-admin-imagen {
+
+  position: relative;
+
+  height: 210px;
+
+  margin: 11px 11px 0;
+
+  border-radius: 13px;
+
+  overflow: hidden;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background:
+    linear-gradient(
+      145deg,
+      #F8FCFF,
+      #EDF7FC
+    );
+
+  border:
+    1px solid #E2EEF5;
+}
+
+
+.premio-admin-imagen img {
+
+  width: 100%;
+
+  height: 100%;
+
+  object-fit: contain;
+
+  padding: 7px;
+}
+
+
+.premio-admin-sin-imagen {
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  color: #93A9B8;
+
+  gap: 8px;
+}
+
+
+.premio-admin-sin-imagen span {
+
+  width: 55px;
+
+  height: 55px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 15px;
+
+  background: var(--biofar-suave);
+
+  font-size: 25px;
+}
+
+
+
+/* =========================================================
+   CONTENIDO
+========================================================= */
+
+.premio-admin-contenido {
+
+  padding:
+    15px 16px 17px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  flex: 1;
+}
+
+
+.premio-admin-superior {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 8px;
+
+  margin-bottom: 10px;
+}
+
+
+.premio-etiqueta {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  padding:
+    5px 8px;
+
+  border-radius: 999px;
+
+  background:
+    var(--biofar-suave);
+
+  color:
+    var(--biofar-oscuro);
+
+  font-size: 10px;
+
+  font-weight: 800;
+
+  letter-spacing: .02em;
+
+  text-transform: uppercase;
+}
+
+
+.stock-disponible,
+.stock-agotado {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 5px;
+
+  font-size: 11px;
+
+  font-weight: 700;
+}
+
+
+.stock-disponible {
+
+  color: var(--verde);
+}
+
+
+.stock-disponible::before {
+
+  content: "";
+
+  width: 7px;
+
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: var(--verde);
+}
+
+
+.stock-agotado {
+
+  color: var(--rojo);
+}
+
+
+.stock-agotado::before {
+
+  content: "";
+
+  width: 7px;
+
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: var(--rojo);
+}
+
+
+
+/* =========================================================
+   NOMBRE + DESCRIPCIÓN
+========================================================= */
+
+.premio-admin-card h3 {
+
+  margin:
+    0 0 7px;
+
+  font-size: 17px;
+
+  color:
+    var(--biofar-profundo);
+
+  line-height: 1.3;
+}
+
+
+.premio-admin-descripcion {
+
+  color:
+    var(--texto-secundario);
+
+  font-size: 13px;
+
+  line-height: 1.5;
+
+  margin:
+    0 0 15px;
+
+  min-height: 39px;
+}
+
+
+
+/* =========================================================
+   PUNTOS
+========================================================= */
+
+.premio-admin-puntos {
+
+  display: flex;
+
+  align-items: baseline;
+
+  justify-content: center;
+
+  gap: 5px;
+
+  width: 100%;
+
+  padding:
+    11px 10px;
+
+  border-radius: 10px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #EDF8FF,
+      #E0F2FD
+    );
+
+  color:
+    var(--biofar-oscuro);
+
+  margin-bottom: 14px;
+}
+
+
+.estrella-puntos {
+
+  font-size: 17px;
+}
+
+
+.premio-admin-puntos strong {
+
+  font-size: 20px;
+
+  font-weight: 800;
+}
+
+
+.premio-admin-puntos span:last-child {
+
+  font-size: 12px;
+
+  font-weight: 650;
+}
+
+
+
+/* =========================================================
+   DETALLES
+========================================================= */
+
+.premio-admin-detalles {
+
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: 10px;
+
+  margin-bottom: 15px;
+}
+
+
+.premio-admin-detalles > div {
+
+  padding: 9px 10px;
+
+  border-radius: 9px;
+
+  background: #F8FBFD;
+
+  border:
+    1px solid #E6EFF5;
+}
+
+
+.detalle-label {
+
+  display: block;
+
+  color:
+    var(--texto-secundario);
+
+  font-size: 10px;
+
+  margin-bottom: 3px;
+}
+
+
+.premio-admin-detalles strong {
+
+  color:
+    var(--biofar-profundo);
+
+  font-size: 12px;
+}
+
+
+
+/* =========================================================
+   ACCIONES
+========================================================= */
+
+.premio-admin-acciones {
+
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: 9px;
+
+  margin-top: auto;
+}
+
+
+.premio-admin-acciones button {
+
+  width: 100%;
+
+  min-height: 39px;
+
+  padding:
+    8px 10px;
+
+  font-size: 12px;
+}
+
+
+.boton-desactivar-biofar {
+
+  background: white;
+
+  color: var(--rojo);
+
+  border:
+    1px solid #F0CACA;
+}
+
+
+.boton-desactivar-biofar:hover {
+
+  background:
+    var(--rojo-suave);
+
+  border-color:
+    #EAA8A8;
+}
+
+
+
+/* =========================================================
+   CATÁLOGO VACÍO
+========================================================= */
+
+.estado-vacio-premios {
+
+  grid-column:
+    1 / -1;
+
+  min-height: 230px;
+
+  padding: 35px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+
+  border:
+    1px dashed #C4DDEB;
+
+  border-radius: 16px;
+
+  background:
+    var(--biofar-muy-suave);
+}
+
+
+.estado-vacio-premios-icono {
+
+  width: 65px;
+
+  height: 65px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 18px;
+
+  margin-bottom: 12px;
+
+  background:
+    var(--biofar-suave);
+
+  font-size: 29px;
+}
+
+
+.estado-vacio-premios h3 {
+
+  margin:
+    0 0 5px;
+
+  color:
+    var(--biofar-profundo);
+}
+
+
+.estado-vacio-premios p {
+
+  margin: 0;
+
+  color:
+    var(--texto-secundario);
+
+  font-size: 13px;
+}
+
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:650px) {
+
+  .premio-admin-acciones {
+
+    grid-template-columns: 1fr;
+  }
 
 }
 
@@ -442,31 +2777,988 @@ tr.fila-clickeable:hover {
 
 
 
-/* ======================================================
-   MEJORAR PANEL HISTORIAL
-====================================================== */
+/* =========================================================
+   PÁGINA USUARIOS BIOFAR
+========================================================= */
+
+.cabecera-pagina-usuarios {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 30px;
+
+  margin-bottom: 22px;
+
+  padding:
+    8px 4px 4px;
+
+}
 
 
-.zona-cliente table {
+.cabecera-pagina-usuarios h1 {
+
+  margin:
+    7px 0 6px;
+
+  font-size: 30px;
+
+  line-height: 1.1;
+
+  color:
+    var(--biofar-profundo);
+
+  letter-spacing:
+    -.02em;
+
+}
 
 
-  font-size:13px;
+.cabecera-pagina-usuarios p {
 
+  margin: 0;
+
+  color:
+    var(--texto-secundario);
+
+  font-size: 14px;
+
+  line-height: 1.5;
+
+}
+
+
+.icono-grande-usuarios {
+
+  width: 76px;
+
+  height: 76px;
+
+  border-radius: 22px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  background:
+    linear-gradient(
+      145deg,
+      #ECF7FE,
+      #DDEFFC
+    );
+
+  color:
+    var(--biofar-oscuro);
+
+  font-size: 35px;
+
+  box-shadow:
+    0 8px 25px
+    rgba(103,168,220,.13);
 
 }
 
 
 
+/* =========================================================
+   CREAR USUARIO
+========================================================= */
+
+.panel-crear-usuario {
+
+  position: relative;
+
+  overflow: hidden;
+
+}
 
 
-/* ======================================================
-   AJUSTE DEL ANCHO GENERAL
-====================================================== */
+.panel-crear-usuario::after {
+
+  content: "+";
+
+  position: absolute;
+
+  right: -35px;
+
+  bottom: -145px;
+
+  font-size: 390px;
+
+  line-height: 1;
+
+  font-weight: 900;
+
+  color:
+    rgba(103,168,220,.035);
+
+  pointer-events: none;
+
+}
 
 
-main {
+.usuario-formulario-grid {
+
+  position: relative;
+
+  z-index: 2;
+
+  display: grid;
+
+  grid-template-columns:
+    1fr
+    1fr
+    .8fr
+    auto;
+
+  gap: 18px;
+
+  align-items: end;
+
+}
 
 
-  max-width:1200px;
+.campo-usuario {
 
+  min-width: 0;
+
+}
+
+
+.campo-ayuda {
+
+  display: block;
+
+  margin-top: 6px;
+
+  color:
+    #8A9EAD;
+
+  font-size: 11px;
+
+  line-height: 1.35;
+
+}
+
+
+.usuario-crear-accion {
+
+  display: flex;
+
+  align-items: flex-end;
+
+}
+
+
+.boton-crear-usuario {
+
+  min-width: 150px;
+
+  white-space: nowrap;
+
+}
+
+
+
+/* =========================================================
+   CABECERA LISTADO
+========================================================= */
+
+.cabecera-listado-usuarios {
+
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-bottom: 18px;
+
+}
+
+
+.usuarios-resumen {
+
+  padding:
+    7px 11px;
+
+  border-radius: 9px;
+
+  background:
+    var(--biofar-suave);
+
+  color:
+    var(--biofar-oscuro);
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  white-space: nowrap;
+
+}
+
+
+
+/* =========================================================
+   TABLA USUARIOS
+========================================================= */
+
+.tabla-usuarios-contenedor {
+
+  overflow-x: auto;
+
+  border:
+    1px solid var(--borde);
+
+  border-radius: 13px;
+
+  background: white;
+
+}
+
+
+.tabla-usuarios {
+
+  margin: 0;
+
+  min-width: 650px;
+
+}
+
+
+.tabla-usuarios thead {
+
+  background:
+    #F7FBFE;
+
+}
+
+
+.tabla-usuarios th {
+
+  padding:
+    13px 15px;
+
+  color:
+    #6B8496;
+
+  font-size: 11px;
+
+  font-weight: 750;
+
+  letter-spacing: .04em;
+
+  text-transform: uppercase;
+
+  border-bottom:
+    1px solid var(--borde);
+
+}
+
+
+.tabla-usuarios td {
+
+  padding:
+    14px 15px;
+
+  vertical-align: middle;
+
+  border-bottom:
+    1px solid #E8F0F5;
+
+  font-size: 13px;
+
+}
+
+
+.tabla-usuarios tbody tr:last-child td {
+
+  border-bottom: 0;
+
+}
+
+
+.tabla-usuarios tbody tr {
+
+  transition:
+    background .15s ease;
+
+}
+
+
+.tabla-usuarios tbody tr:hover {
+
+  background:
+    #FAFDFF;
+
+}
+
+
+.columna-acciones {
+
+  text-align: right;
+
+}
+
+
+
+/* =========================================================
+   ESTILOS PARA CONTENIDO GENERADO POR usuarios.js
+========================================================= */
+
+.usuario-tabla-nombre {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 11px;
+
+}
+
+
+.usuario-avatar-mini {
+
+  width: 36px;
+
+  height: 36px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background:
+    var(--biofar-suave);
+
+  color:
+    var(--biofar-oscuro);
+
+  font-weight: 800;
+
+  font-size: 13px;
+
+}
+
+
+.usuario-nombre-principal {
+
+  color:
+    var(--biofar-profundo);
+
+  font-weight: 700;
+
+}
+
+
+/* ROL */
+
+.badge-rol {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  padding:
+    6px 9px;
+
+  border-radius: 999px;
+
+  font-size: 11px;
+
+  font-weight: 750;
+
+}
+
+
+.badge-cajero {
+
+  background:
+    #EEF7FD;
+
+  color:
+    var(--biofar-oscuro);
+
+}
+
+
+.badge-admin {
+
+  background:
+    #EDF3FF;
+
+  color:
+    #516DB8;
+
+}
+
+
+/* ESTADO */
+
+.estado-usuario {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+}
+
+
+.estado-usuario::before {
+
+  content: "";
+
+  width: 7px;
+
+  height: 7px;
+
+  border-radius: 50%;
+
+}
+
+
+.estado-activo {
+
+  color:
+    var(--verde);
+
+}
+
+
+.estado-activo::before {
+
+  background:
+    var(--verde);
+
+}
+
+
+.estado-inactivo {
+
+  color:
+    var(--rojo);
+
+}
+
+
+.estado-inactivo::before {
+
+  background:
+    var(--rojo);
+
+}
+
+
+
+/* =========================================================
+   BOTONES TABLA
+========================================================= */
+
+.boton-usuario-accion {
+
+  min-height: 35px;
+
+  padding:
+    7px 12px;
+
+  border-radius: 8px;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+}
+
+
+.boton-inhabilitar {
+
+  background:
+    white;
+
+  color:
+    var(--rojo);
+
+  border:
+    1px solid #EAC3C3;
+
+}
+
+
+.boton-inhabilitar:hover {
+
+  background:
+    var(--rojo-suave);
+
+}
+
+
+.boton-habilitar {
+
+  background:
+    white;
+
+  color:
+    var(--verde);
+
+  border:
+    1px solid #BFE2CF;
+
+}
+
+
+.boton-habilitar:hover {
+
+  background:
+    var(--verde-suave);
+
+}
+
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:1000px) {
+
+  .usuario-formulario-grid {
+
+    grid-template-columns:
+      repeat(2, 1fr);
+
+  }
+
+
+  .usuario-crear-accion {
+
+    grid-column:
+      1 / -1;
+
+  }
+
+}
+
+
+@media(max-width:650px) {
+
+  .usuario-formulario-grid {
+
+    grid-template-columns:
+      1fr;
+
+  }
+
+
+  .usuario-crear-accion {
+
+    grid-column: auto;
+
+  }
+
+
+  .boton-crear-usuario {
+
+    width: 100%;
+
+  }
+
+
+  .cabecera-listado-usuarios {
+
+    flex-direction: column;
+
+  }
+
+
+  .icono-grande-usuarios {
+
+    display: none;
+
+  }
+
+}
+
+
+/* =========================================================
+   HISTORIAL BIOFAR
+========================================================= */
+
+.tabla-movimientos {
+
+  margin-top: 14px;
+
+}
+
+
+.tabla-movimientos td {
+
+  padding:
+    13px 10px;
+
+  vertical-align: middle;
+
+}
+
+
+/* =========================================================
+   MOVIMIENTO
+========================================================= */
+
+.movimiento-principal {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 11px;
+
+}
+
+
+.movimiento-icono {
+
+  width: 38px;
+
+  height: 38px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 11px;
+
+  font-size: 16px;
+
+  font-weight: 850;
+
+}
+
+
+.movimiento-titulo {
+
+  color:
+    var(--biofar-profundo);
+
+  font-size: 13px;
+
+  font-weight: 750;
+
+  white-space: nowrap;
+
+}
+
+
+.movimiento-tipo {
+
+  margin-top: 2px;
+
+  color:
+    var(--texto-secundario);
+
+  font-size: 10px;
+
+  text-transform: uppercase;
+
+  letter-spacing: .04em;
+
+}
+
+
+
+/* =========================================================
+   ACUMULADO / COMPRA
+========================================================= */
+
+.movimiento-acumulado
+.movimiento-icono {
+
+  background:
+    var(--verde-suave);
+
+  color:
+    var(--verde);
+
+}
+
+
+.movimiento-acumulado:hover {
+
+  background:
+    #FAFEFC;
+
+}
+
+
+
+/* =========================================================
+   CANJE
+========================================================= */
+
+.movimiento-canjeado
+.movimiento-icono {
+
+  background:
+    var(--rojo-suave);
+
+  color:
+    var(--rojo);
+
+}
+
+
+.movimiento-canjeado:hover {
+
+  background:
+    #FFFCFC;
+
+}
+
+
+
+/* =========================================================
+   OTROS MOVIMIENTOS
+========================================================= */
+
+.movimiento-general
+.movimiento-icono {
+
+  background:
+    var(--biofar-suave);
+
+  color:
+    var(--biofar-oscuro);
+
+}
+
+
+
+/* =========================================================
+   INFORMACIÓN
+========================================================= */
+
+.movimiento-detalle {
+
+  color:
+    #506D82;
+
+  font-size: 12px;
+
+}
+
+
+.movimiento-cajero {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  padding:
+    5px 8px;
+
+  border-radius: 7px;
+
+  background:
+    #F4F8FB;
+
+  color:
+    #5B7487;
+
+  font-size: 11px;
+
+  font-weight: 650;
+
+}
+
+
+.movimiento-fecha {
+
+  color:
+    var(--texto-secundario);
+
+  font-size: 11px;
+
+  white-space: nowrap;
+
+}
+
+
+
+/* =========================================================
+   PUNTOS
+========================================================= */
+
+.movimiento-puntos-columna {
+
+  text-align: right;
+
+  white-space: nowrap;
+
+}
+
+
+.puntos-positivos {
+
+  display: inline-flex;
+
+  justify-content: center;
+
+  min-width: 68px;
+
+  padding:
+    7px 10px;
+
+  border-radius: 9px;
+
+  background:
+    var(--verde-suave);
+
+  color:
+    var(--verde);
+
+  font-size: 12px;
+
+  font-weight: 800;
+
+}
+
+
+.puntos-negativos {
+
+  display: inline-flex;
+
+  justify-content: center;
+
+  min-width: 68px;
+
+  padding:
+    7px 10px;
+
+  border-radius: 9px;
+
+  background:
+    var(--rojo-suave);
+
+  color:
+    var(--rojo);
+
+  font-size: 12px;
+
+  font-weight: 800;
+
+}
+
+
+
+/* =========================================================
+   SIN MOVIMIENTOS
+========================================================= */
+
+.historial-vacio {
+
+  min-height: 90px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 12px;
+
+  color:
+    var(--texto-secundario);
+
+}
+
+
+.historial-vacio-icono {
+
+  width: 42px;
+
+  height: 42px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 12px;
+
+  background:
+    var(--biofar-suave);
+
+  color:
+    var(--biofar-oscuro);
+
+  font-size: 18px;
+
+}
+
+
+.historial-vacio strong {
+
+  display: block;
+
+  color:
+    var(--biofar-profundo);
+
+  font-size: 13px;
+
+}
+
+
+.historial-vacio span {
+
+  display: block;
+
+  margin-top: 3px;
+
+  font-size: 11px;
+
+}
+
+.menu-icono {
+  width: 22px;
+  height: 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+}
+
+.menu-icono img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: contain;
 }

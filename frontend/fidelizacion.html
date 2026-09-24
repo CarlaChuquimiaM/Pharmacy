@@ -2,675 +2,564 @@
 <html lang="es">
 
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="UTF-8" />
+  <title>Biofar — Fidelización</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-<title>
-Farmacia — Fidelización
-</title>
-
-
-<link
-rel="stylesheet"
-href="css/estilo.css"
-/>
-
+  <link rel="stylesheet" href="css/estilo.css">
 </head>
-
 
 <body>
 
+  <!-- ==============================
+       CABECERA BIOFAR
+  =============================== -->
 
-<div class="barra-superior">
+  <header class="barra-superior">
 
+    <div class="marca-biofar">
 
-<div class="titulo">
-Sistema de Farmacia — Fidelización
-</div>
+      <img
+        src="img/logo-biofar.png"
+        alt="Farmacia Biofar"
+        class="logo-biofar"
+      >
 
+      <div class="separador-marca"></div>
 
+      <div class="nombre-sistema">
+        Sistema de Fidelización
+      </div>
 
-<nav>
-
-<a href="fidelizacion.html">
-Fidelización
-</a>
-
-
-<a
-href="premios.html"
-id="enlace-premios"
-class="oculto">
-
-Premios
-
-</a>
+    </div>
 
 
-<a
-href="usuarios.html"
-id="enlace-usuarios"
-class="oculto">
+<nav class="menu-principal">
 
-Usuarios
+  <a
+    href="fidelizacion.html"
+    class="menu-activo"
+  >
+    <span class="menu-icono">
+      <img src="img/usuario.svg" alt="">
+    </span>
 
-</a>
+    Fidelización
+  </a>
 
+
+  <a
+    href="premios.html"
+    id="enlace-premios"
+    class="oculto"
+  >
+    <span class="menu-icono">
+      <img src="img/regalo.svg" alt="">
+    </span>
+
+    Premios
+  </a>
+
+
+  <a
+    href="usuarios.html"
+    id="enlace-usuarios"
+    class="oculto"
+  >
+    <span class="menu-icono">
+      <img src="img/grupo.svg" alt="">
+    </span>
+
+    Usuarios
+  </a>
 
 </nav>
 
 
+    <div
+      class="usuario-info"
+      id="usuario-info"
+    ></div>
 
-<div
-class="usuario-info"
-id="usuario-info">
+  </header>
 
-</div>
 
 
-</div>
+  <main>
 
 
+    <!-- ==============================
+         BUSCAR CLIENTE
+    =============================== -->
 
+    <section class="panel panel-busqueda">
 
+      <div class="titulo-seccion">
 
-<main>
+        <div class="icono-seccion">
+          <img src="img/buscar.svg" alt="">
+        </div>
 
+        <div>
+          <h2>Identificar cliente</h2>
 
+          <p>
+            Ingresa el CI o NIT del cliente para consultar sus puntos,
+            registrar una compra o canjear un premio.
+          </p>
+        </div>
 
-<!-- IDENTIFICAR CLIENTE -->
+      </div>
 
 
-<div class="panel">
+      <div class="busqueda-cliente">
 
+        <div class="campo-formulario">
 
-<h2>
-Identificar cliente
-</h2>
+          <label>
+            Tipo de documento
+          </label>
 
+          <select id="tipo-documento">
 
-<p style="color:#4a6572;">
+            <option value="CI">
+              CI
+            </option>
 
-Ingresa el CI o NIT del cliente para consultar
-sus puntos, registrar una compra o canjear un premio.
+            <option value="NIT">
+              NIT
+            </option>
 
-</p>
+          </select>
 
+        </div>
 
 
-<div class="grupo-form">
+        <div class="campo-formulario">
 
+          <label>
+            Número de documento
+          </label>
 
+          <input
+            type="text"
+            id="numero-documento"
+            placeholder="Ej: 12345678"
+            autocomplete="off"
+          >
 
-<div>
+        </div>
 
-<label>
-Tipo de documento
-</label>
+      </div>
 
 
-<select id="tipo-documento">
+      <button
+        type="button"
+        class="boton-primario boton-buscar"
+        id="boton-buscar-documento"
+      >
+        <span>⌕</span>
+        Buscar cliente
+      </button>
 
 
-<option value="CI">
-CI
-</option>
+      <div
+        class="mensaje-error"
+        id="error-busqueda-documento"
+      ></div>
 
+    </section>
 
-<option value="NIT">
-NIT
-</option>
 
 
-</select>
+    <!-- ==============================
+         NUEVO CLIENTE
+    =============================== -->
 
-</div>
+    <section
+      class="panel oculto"
+      id="panel-cliente-nuevo"
+    >
 
+      <div class="titulo-seccion">
 
+        <div class="icono-seccion">
+          +
+        </div>
 
+        <div>
 
-<div>
+          <h2>
+            Cliente no registrado
+          </h2>
 
-<label>
-Número de documento
-</label>
+          <p>
+            Completa los datos para incorporarlo al programa de fidelización.
+          </p>
 
+        </div>
 
-<input
+      </div>
 
-type="text"
 
-id="numero-documento"
+      <div class="documento-detectado">
 
-placeholder="Ej: 12345678"
+        Documento:
 
-autocomplete="off"
+        <strong id="documento-nuevo-cliente"></strong>
 
-/>
+      </div>
 
 
-</div>
+      <div class="grupo-form">
 
+        <div>
+          <label>Nombre</label>
 
+          <input
+            id="nuevo-nombre"
+            type="text"
+          >
+        </div>
 
 
-<button
+        <div>
+          <label>Apellido</label>
 
-type="button"
+          <input
+            id="nuevo-apellido"
+            type="text"
+          >
+        </div>
 
-class="boton-primario"
 
-id="boton-buscar-documento"
+        <div>
+          <label>Teléfono</label>
 
->
+          <input
+            id="nuevo-telefono"
+            type="text"
+          >
+        </div>
 
-Buscar cliente
 
-</button>
+        <button
+          class="boton-verde"
+          id="boton-crear-cliente"
+        >
+          Registrar cliente
+        </button>
 
+      </div>
 
 
-</div>
+      <div
+        class="mensaje-error"
+        id="error-crear-cliente"
+      ></div>
 
+    </section>
 
 
-<div
 
-class="mensaje-error"
+    <!-- ==============================
+         CLIENTE ENCONTRADO
+    =============================== -->
 
-id="error-busqueda-documento">
+    <section
+      class="panel panel-detalle oculto"
+      id="panel-cliente-detalle"
+    >
 
-</div>
 
+      <div class="fidelizacion-grid">
 
 
-</div>
+        <!-- =======================
+             CLIENTE
+        ======================== -->
 
+        <div class="zona-cliente">
 
 
+          <div class="cabecera-bloque">
 
+            <div class="titulo-bloque">
 
+              <div class="icono-mini">
+                ♙
+              </div>
 
-<!-- CLIENTE NUEVO -->
+              <h2>
+                Cliente
+              </h2>
 
+            </div>
 
-<div
+          </div>
 
-class="panel oculto"
 
-id="panel-cliente-nuevo"
 
->
+          <div class="tarjeta-cliente">
 
 
-<h2>
-Cliente no registrado
-</h2>
+            <div class="avatar-cliente">
+              ♙
+            </div>
 
 
-<p>
+            <div class="datos-cliente">
 
-Documento:
+              <div
+                class="cliente-nombre"
+                id="detalle-nombre"
+              ></div>
 
-<strong id="documento-nuevo-cliente">
 
-</strong>
+              <p id="detalle-documento"></p>
 
-</p>
+              <p id="detalle-telefono"></p>
 
+            </div>
 
 
-<div class="grupo-form">
+            <div class="caja-puntos">
 
+              <span class="etiqueta-puntos">
+                ★ Puntos totales
+              </span>
 
-<div>
+              <div
+                class="puntos-grande"
+                id="detalle-puntos"
+              >
+                0
+              </div>
 
-<label>
-Nombre
-</label>
+            </div>
 
+          </div>
 
-<input
 
-id="nuevo-nombre"
 
-type="text"
+          <!-- REGISTRAR COMPRA -->
 
-/>
+          <div class="subseccion">
 
+            <div class="subseccion-titulo">
 
-</div>
+              <h3>
+                Registrar compra
+              </h3>
 
+            </div>
 
 
-<div>
+            <p class="texto-ayuda">
+              Por cada Bs 1 completo recibe 1 punto.
+            </p>
 
-<label>
-Apellido
-</label>
 
+            <div class="registro-compra">
 
-<input
+              <div>
 
-id="nuevo-apellido"
+                <label>
+                  Monto compra (Bs)
+                </label>
 
-type="text"
+                <input
+                  type="number"
+                  id="monto-compra"
+                  min="0.01"
+                  step="0.01"
+                  placeholder="Ej: 120.00"
+                >
 
-/>
+              </div>
 
 
-</div>
+              <button
+                class="boton-verde"
+                id="boton-sumar"
+              >
+                + Registrar compra
+              </button>
 
+            </div>
 
 
+            <div
+              class="mensaje-error"
+              id="error-sumar"
+            ></div>
 
-<div>
 
-<label>
-Teléfono
-</label>
+            <div
+              class="mensaje-exito"
+              id="exito-sumar"
+            ></div>
 
+          </div>
 
-<input
 
-id="nuevo-telefono"
 
-type="text"
+          <!-- HISTORIAL -->
 
-/>
+          <div class="subseccion">
 
+            <div class="subseccion-titulo">
 
-</div>
+              <h3>
+                ◷ Movimientos recientes
+              </h3>
 
+            </div>
 
 
+            <div class="tabla-contenedor">
 
-<button
+              <table class="tabla-movimientos">
 
-class="boton-verde"
+  <thead>
 
-id="boton-crear-cliente"
+    <tr>
 
->
+      <th>
+        Movimiento
+      </th>
 
-Registrar cliente
+      <th>
+        Detalle
+      </th>
 
-</button>
+      <th>
+        Cajero
+      </th>
 
+      <th>
+        Fecha
+      </th>
 
+      <th class="movimiento-puntos-columna">
+        Puntos
+      </th>
 
-</div>
+    </tr>
 
+  </thead>
 
 
-<div
-
-class="mensaje-error"
-
-id="error-crear-cliente">
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-
-<!-- DETALLE CLIENTE -->
-
-
-
-<div
-
-class="panel oculto"
-
-id="panel-cliente-detalle"
-
->
-
-
-
-
-<div class="fidelizacion-grid">
-
-
-
-
-
-<!-- ======================
-     COLUMNA CLIENTE
-======================= -->
-
-
-<div class="zona-cliente">
-
-
-
-<h2>
-Cliente
-</h2>
-
-
-
-
-<div
-
-class="cliente-nombre"
-
-id="detalle-nombre">
-
-</div>
-
-
-
-
-<p
-
-id="detalle-documento"
-
-style="color:#4a6572;font-size:13px;">
-
-</p>
-
-
-
-
-<p
-
-id="detalle-telefono"
-
-style="color:#4a6572;font-size:13px;">
-
-</p>
-
-
-
-
-
-<h3>
-Puntos acumulados
-</h3>
-
-
-<div
-
-class="puntos-grande"
-
-id="detalle-puntos">
-
-0
-
-</div>
-
-
-
-
-
-
-<hr>
-
-
-
-
-
-
-<h2>
-Registrar compra
-</h2>
-
-
-
-<p style="color:#4a6572;">
-
-Por cada Bs 1 completo recibe 1 punto.
-
-</p>
-
-
-
-<div class="grupo-form">
-
-
-
-<div>
-
-<label>
-Monto compra (Bs)
-</label>
-
-
-<input
-
-type="number"
-
-id="monto-compra"
-
-min="0.01"
-
-step="0.01"
-
-/>
-
-
-</div>
-
-
-
-
-<button
-
-class="boton-verde"
-
-id="boton-sumar"
-
->
-
-Registrar compra
-
-</button>
-
-
-
-</div>
-
-
-
-
-<div
-
-class="mensaje-error"
-
-id="error-sumar">
-
-</div>
-
-
-
-<div
-
-class="mensaje-exito"
-
-id="exito-sumar">
-
-</div>
-
-
-
-
-
-
-
-<hr>
-
-
-
-
-
-<h2>
-Historial
-</h2>
-
-
-
-<table>
-
-
-<thead>
-
-<tr>
-
-<th>
-Fecha
-</th>
-
-
-<th>
-Tipo
-</th>
-
-
-<th>
-Puntos
-</th>
-
-
-<th>
-Detalle
-</th>
-
-
-<th>
-Cajero
-</th>
-
-
-</tr>
-
-</thead>
-
-
-
-<tbody
-
-id="cuerpo-historial">
-
-</tbody>
-
-
+  <tbody
+    id="cuerpo-historial"
+  ></tbody>
 
 </table>
 
+            </div>
 
+          </div>
 
 
+        </div>
 
-</div>
 
 
+        <!-- =======================
+             PREMIOS
+        ======================== -->
 
+        <div class="zona-premios">
 
 
+          <div class="cabecera-premios">
 
+            <div class="titulo-bloque">
 
-<!-- ======================
-     COLUMNA PREMIOS
-======================= -->
+              <div class="icono-mini">
+                <img src="img/regalo.svg" alt="">
+              </div>
 
+              <h2>
+                Premios disponibles
+              </h2>
 
+            </div>
 
-<div class="zona-premios">
 
+            
 
+          </div>
 
-<h2>
-Premios disponibles
-</h2>
 
+          <p class="texto-ayuda">
+            Premios que el cliente puede alcanzar con sus puntos acumulados.
+          </p>
 
 
-<p style="color:#4a6572;">
+          <div
+            id="lista-premios"
+            class="lista-premios"
+          >
 
-El cliente podrá ver los premios disponibles
-según sus puntos acumulados.
+            <p class="estado-vacio">
+              Selecciona un cliente para ver premios.
+            </p>
 
-</p>
+          </div>
 
 
+          <div
+            class="mensaje-error"
+            id="error-canjear"
+          ></div>
 
 
-<div
+          <div
+            class="mensaje-exito"
+            id="exito-canjear"
+          ></div>
 
-id="lista-premios"
 
-class="lista-premios"
+        </div>
 
->
 
-<p>
+      </div>
 
-Selecciona un cliente para ver premios.
+    </section>
 
-</p>
 
+  </main>
 
-</div>
 
 
+  <footer class="pie-sistema">
 
-<div
+    <div class="pie-marca">
 
-class="mensaje-error"
+      <img
+        src="img/logo-biofar.png"
+        alt="Biofar"
+      >
 
-id="error-canjear">
+      <span>
+        Cuidamos de ti
+      </span>
 
-</div>
+    </div>
 
 
+    <div>
+      Sistema de Fidelización · Farmacia Biofar
+    </div>
 
-<div
+  </footer>
 
-class="mensaje-exito"
 
-id="exito-canjear">
 
-</div>
-
-
-
-
-</div>
-
-
-
-
-
-
-</div>
-
-
-
-
-</div>
-
-
-
-
-
-</main>
-
-
-
-
-<script src="js/api.js"></script>
-
-<script src="js/fidelizacion.js"></script>
-
+  <script src="js/api.js"></script>
+  <script src="js/fidelizacion.js"></script>
 
 </body>
 

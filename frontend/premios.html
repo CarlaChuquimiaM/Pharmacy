@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Farmacia — Premios</title>
+  <title>Biofar — Premios</title>
 
   <link rel="stylesheet" href="css/estilo.css" />
 </head>
@@ -12,227 +13,404 @@
 <body>
 
   <!-- =====================================================
-       BARRA SUPERIOR
+       CABECERA BIOFAR
   ====================================================== -->
 
-  <div class="barra-superior">
+  <header class="barra-superior">
 
-    <div class="titulo">
-      Sistema de Farmacia — Premios
+    <div class="marca-biofar">
+
+      <img
+        src="img/logo-biofar.png"
+        alt="Farmacia Biofar"
+        class="logo-biofar"
+      />
+
+      <div class="separador-marca"></div>
+
+      <div class="nombre-sistema">
+        Sistema de Fidelización
+      </div>
+
     </div>
 
-    <nav>
 
-      <a href="fidelizacion.html">
-        Fidelización
-      </a>
+<nav class="menu-principal">
 
-      <a
-        href="premios.html"
-        id="enlace-premios"
-        class="oculto"
-        >
-        Premios
-        </a>
+  <a href="fidelizacion.html">
+    <span class="menu-icono">
+      <img src="img/usuario.svg" alt="">
+    </span>
+    Fidelización
+  </a>
 
-      <a
-        href="usuarios.html"
-        id="enlace-usuarios"
-        class="oculto"
-      >
-        Usuarios
-      </a>
 
-    </nav>
+  <a
+    href="premios.html"
+    id="enlace-premios"
+    class="oculto menu-activo"
+  >
+    <span class="menu-icono">
+      <img src="img/regalo.svg" alt="">
+    </span>
+    Premios
+  </a>
+
+
+  <a
+    href="usuarios.html"
+    id="enlace-usuarios"
+    class="oculto"
+  >
+    <span class="menu-icono">
+      <img src="img/grupo.svg" alt="">
+    </span>
+    Usuarios
+  </a>
+
+</nav>
 
     <div
       class="usuario-info"
       id="usuario-info"
     ></div>
 
-  </div>
+  </header>
 
 
-  <!-- =====================================================
-       CONTENIDO
-  ====================================================== -->
 
   <main>
 
 
-    <!-- =================================================
-         CREAR PREMIO
-    ================================================== -->
+    <!-- =====================================================
+         ENCABEZADO DE PÁGINA
+    ====================================================== -->
 
-    <div class="panel">
+    <section class="cabecera-pagina-premios">
 
-      <h2>
-        Crear nuevo premio
-      </h2>
+      <div>
 
-      <p style="color:#4a6572;">
-        Define qué premio podrá obtener el cliente,
-        cuántos puntos necesita y cuántas unidades hay disponibles.
-      </p>
+        <span class="etiqueta-seccion">
+          Catálogo Biofar
+        </span>
 
+        <h1>
+          Gestión de premios
+        </h1>
 
-      <div class="grupo-form">
+        <p>
+          Crea, administra y actualiza los premios disponibles
+          dentro del programa de fidelización.
+        </p>
 
+      </div>
 
-        <div>
-          <label for="premio-nombre">
-            Nombre del premio
-          </label>
+      <div class="icono-grande-premios">
+        🎁
+      </div>
 
-          <input
-            type="text"
-            id="premio-nombre"
-            placeholder="Ej: Taza Biofar"
-            autocomplete="off"
-          />
-        </div>
+    </section>
 
 
-        <div>
-          <label for="premio-descripcion">
-            Descripción
-          </label>
 
-          <input
-            type="text"
-            id="premio-descripcion"
-            placeholder="Ej: Taza personalizada Biofar"
-            autocomplete="off"
-          />
-        </div>
+    <!-- =====================================================
+         CREAR NUEVO PREMIO
+    ====================================================== -->
 
+    <section class="panel panel-premio-formulario">
 
-        <div>
-          <label for="premio-puntos">
-            Puntos necesarios
-          </label>
+      <div class="titulo-seccion">
 
-          <input
-            type="number"
-            id="premio-puntos"
-            min="1"
-            step="1"
-            placeholder="Ej: 800"
-          />
-        </div>
-
-
-        <div>
-          <label for="premio-stock">
-            Stock disponible
-          </label>
-
-          <input
-            type="number"
-            id="premio-stock"
-            min="0"
-            step="1"
-            placeholder="Ej: 20"
-          />
+        <div class="icono-seccion">
+          +
         </div>
 
         <div>
 
-  <label for="premio-imagen">
-    Foto del premio
-  </label>
+          <h2>
+            Crear nuevo premio
+          </h2>
 
-  <input
-    type="file"
-    id="premio-imagen"
-    accept="image/png,image/jpeg,image/webp"
-  />
+          <p>
+            Define el nombre, descripción, puntos requeridos,
+            stock y fotografía del premio.
+          </p>
 
-</div>
-
-
-<div>
-
-<img
-  id="vista-previa-premio"
-  class="oculto"
-  style="
-    width:180px;
-    height:180px;
-    object-fit:cover;
-    border-radius:12px;
-    border:1px solid #ccc;
-  "
-/>
-
-</div>
-
-
-        <button
-          type="button"
-          class="boton-verde"
-          id="boton-crear-premio"
-        >
-          Crear premio
-        </button>
+        </div>
 
       </div>
 
 
-      <div
-        class="mensaje-error"
-        id="error-crear-premio"
-      ></div>
+      <div class="premio-form-grid">
 
 
-      <div
-        class="mensaje-exito"
-        id="exito-crear-premio"
-      ></div>
+        <!-- CAMPOS -->
 
-    </div>
+        <div class="premio-form-campos">
 
 
+          <div class="grupo-form premio-form-dos-columnas">
 
-    <!-- =================================================
-         LISTADO DE PREMIOS
-    ================================================== -->
+            <div>
 
-    <div class="panel">
+              <label for="premio-nombre">
+                Nombre del premio
+              </label>
 
-      <h2>
-        Catálogo de premios
-      </h2>
+              <input
+                type="text"
+                id="premio-nombre"
+                placeholder="Ej: Taza Biofar"
+                autocomplete="off"
+              />
 
-      <p style="color:#4a6572;">
-        Aquí puedes revisar los premios disponibles para los clientes.
-      </p>
+            </div>
+
+
+            <div>
+
+              <label for="premio-descripcion">
+                Descripción
+              </label>
+
+              <input
+                type="text"
+                id="premio-descripcion"
+                placeholder="Ej: Taza personalizada Biofar"
+                autocomplete="off"
+              />
+
+            </div>
+
+
+            <div>
+
+              <label for="premio-puntos">
+                Puntos necesarios
+              </label>
+
+              <input
+                type="number"
+                id="premio-puntos"
+                min="1"
+                step="1"
+                placeholder="Ej: 800"
+              />
+
+            </div>
+
+
+            <div>
+
+              <label for="premio-stock">
+                Stock disponible
+              </label>
+
+              <input
+                type="number"
+                id="premio-stock"
+                min="0"
+                step="1"
+                placeholder="Ej: 20"
+              />
+
+            </div>
+
+          </div>
+
+
+          <div class="campo-imagen-premio">
+
+            <label for="premio-imagen">
+              Foto del premio
+            </label>
+
+            <div class="archivo-personalizado">
+
+              <input
+                type="file"
+                id="premio-imagen"
+                accept="image/png,image/jpeg,image/webp"
+              />
+
+            </div>
+
+            <p class="texto-ayuda">
+              Formatos recomendados: PNG, JPG o WEBP.
+            </p>
+
+          </div>
+
+
+          <button
+            type="button"
+            class="boton-primario boton-crear-premio"
+            id="boton-crear-premio"
+          >
+            + Crear premio
+          </button>
+
+
+          <div
+            class="mensaje-error"
+            id="error-crear-premio"
+          ></div>
+
+
+          <div
+            class="mensaje-exito"
+            id="exito-crear-premio"
+          ></div>
+
+        </div>
+
+
+
+        <!-- VISTA PREVIA -->
+
+        <div class="premio-vista-previa">
+
+          <div class="premio-preview-box">
+
+            <div class="premio-preview-titulo">
+              Vista previa
+            </div>
+
+
+            <div class="premio-preview-imagen">
+
+              <img
+                id="vista-previa-premio"
+                class="oculto"
+                alt="Vista previa del premio"
+              />
+
+
+              <div class="preview-placeholder">
+                <div class="preview-placeholder-icono">
+                  🎁
+                </div>
+
+                <span>
+                  Selecciona una fotografía
+                </span>
+              </div>
+
+            </div>
+
+
+            <div class="preview-info">
+
+              <div class="preview-chip">
+                Premio Biofar
+              </div>
+
+              <p>
+                La fotografía aparecerá en el catálogo
+                de premios del cliente.
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         CATÁLOGO
+    ====================================================== -->
+
+    <section class="panel panel-catalogo-premios">
+
+      <div class="cabecera-catalogo">
+
+        <div>
+
+          <div class="titulo-bloque">
+
+            <div class="icono-mini">
+              🎁
+            </div>
+
+            <h2>
+              Catálogo de premios
+            </h2>
+
+          </div>
+
+          <p class="texto-ayuda">
+            Revisa y administra los premios disponibles
+            para los clientes.
+          </p>
+
+        </div>
+
+
+        <div class="catalogo-resumen">
+          Premios activos
+        </div>
+
+      </div>
 
 
       <div
         id="lista-premios-admin"
+        class="catalogo-premios-admin"
       >
-        <p>
-          Cargando premios...
-        </p>
+
+        <div class="estado-cargando-premios">
+
+          <div class="estado-cargando-icono">
+            🎁
+          </div>
+
+          <p>
+            Cargando premios...
+          </p>
+
+        </div>
+
       </div>
 
-    </div>
+    </section>
 
 
 
-    <!-- =================================================
-         PANEL DE EDICIÓN
-    ================================================== -->
+    <!-- =====================================================
+         EDITAR PREMIO
+    ====================================================== -->
 
-    <div
-      class="panel oculto"
+    <section
+      class="panel panel-editar-premio oculto"
       id="panel-editar-premio"
     >
 
-      <h2>
-        Editar premio
-      </h2>
+      <div class="titulo-seccion">
+
+        <div class="icono-seccion">
+          ✎
+        </div>
+
+        <div>
+
+          <h2>
+            Editar premio
+          </h2>
+
+          <p>
+            Actualiza la información del premio seleccionado.
+          </p>
+
+        </div>
+
+      </div>
 
 
       <input
@@ -241,138 +419,209 @@
       />
 
 
-      <div class="grupo-form">
+      <div class="premio-form-grid">
 
 
-        <div>
-          <label for="editar-premio-nombre">
-            Nombre
-          </label>
+        <!-- CAMPOS EDICIÓN -->
 
-          <input
-            type="text"
-            id="editar-premio-nombre"
-          />
+        <div class="premio-form-campos">
+
+          <div class="grupo-form premio-form-dos-columnas">
+
+
+            <div>
+
+              <label for="editar-premio-nombre">
+                Nombre
+              </label>
+
+              <input
+                type="text"
+                id="editar-premio-nombre"
+              />
+
+            </div>
+
+
+            <div>
+
+              <label for="editar-premio-descripcion">
+                Descripción
+              </label>
+
+              <input
+                type="text"
+                id="editar-premio-descripcion"
+              />
+
+            </div>
+
+
+            <div>
+
+              <label for="editar-premio-puntos">
+                Puntos necesarios
+              </label>
+
+              <input
+                type="number"
+                id="editar-premio-puntos"
+                min="1"
+                step="1"
+              />
+
+            </div>
+
+
+            <div>
+
+              <label for="editar-premio-stock">
+                Stock
+              </label>
+
+              <input
+                type="number"
+                id="editar-premio-stock"
+                min="0"
+                step="1"
+              />
+
+            </div>
+
+
+          </div>
+
+
+          <div class="campo-imagen-premio">
+
+            <label for="editar-premio-imagen">
+              Cambiar fotografía
+            </label>
+
+            <input
+              type="file"
+              id="editar-premio-imagen"
+              accept="image/png,image/jpeg,image/webp"
+            />
+
+            <p class="texto-ayuda">
+              Déjalo vacío si deseas conservar la fotografía actual.
+            </p>
+
+          </div>
+
+
+          <div class="acciones-edicion">
+
+            <button
+              type="button"
+              class="boton-primario"
+              id="boton-guardar-premio"
+            >
+              Guardar cambios
+            </button>
+
+
+            <button
+              type="button"
+              class="boton-secundario"
+              id="boton-cancelar-edicion"
+            >
+              Cancelar
+            </button>
+
+          </div>
+
+
+          <div
+            class="mensaje-error"
+            id="error-editar-premio"
+          ></div>
+
+
+          <div
+            class="mensaje-exito"
+            id="exito-editar-premio"
+          ></div>
+
         </div>
 
 
-        <div>
-          <label for="editar-premio-descripcion">
-            Descripción
-          </label>
 
-          <input
-            type="text"
-            id="editar-premio-descripcion"
-          />
+        <!-- FOTO ACTUAL -->
+
+        <div class="premio-vista-previa">
+
+          <div class="premio-preview-box">
+
+            <div class="premio-preview-titulo">
+              Foto actual
+            </div>
+
+
+            <div class="premio-preview-imagen">
+
+              <img
+                id="editar-vista-imagen"
+                class="oculto"
+                alt="Imagen actual del premio"
+              />
+
+              <div class="preview-placeholder">
+
+                <div class="preview-placeholder-icono">
+                  🖼
+                </div>
+
+                <span>
+                  Sin fotografía
+                </span>
+
+              </div>
+
+            </div>
+
+          </div>
+
         </div>
 
-
-        <div>
-          <label for="editar-premio-puntos">
-            Puntos necesarios
-          </label>
-
-          <input
-            type="number"
-            id="editar-premio-puntos"
-            min="1"
-            step="1"
-          />
-        </div>
-
-
-        <div>
-          <label for="editar-premio-stock">
-            Stock
-          </label>
-
-          <input
-            type="number"
-            id="editar-premio-stock"
-            min="0"
-            step="1"
-          />
-        </div>
-
-        <div>
-
-<label>
-Foto actual
-</label>
-
-<img
-id="editar-vista-imagen"
-class="oculto"
-style="
-width:180px;
-height:180px;
-object-fit:cover;
-border-radius:12px;
-border:1px solid #ccc;
-"
-/>
-
-</div>
-
-
-<div>
-
-<label for="editar-premio-imagen">
-Cambiar foto (opcional)
-</label>
-
-
-<input
-type="file"
-id="editar-premio-imagen"
-accept="image/png,image/jpeg,image/webp"
-/>
-
-</div>
-
-        <button
-          type="button"
-          class="boton-verde"
-          id="boton-guardar-premio"
-        >
-          Guardar cambios
-        </button>
-
-
-        <button
-          type="button"
-          class="boton-secundario"
-          id="boton-cancelar-edicion"
-        >
-          Cancelar
-        </button>
 
       </div>
 
+    </section>
 
-      <div
-        class="mensaje-error"
-        id="error-editar-premio"
-      ></div>
-
-
-      <div
-        class="mensaje-exito"
-        id="exito-editar-premio"
-      ></div>
-
-    </div>
 
   </main>
 
 
-  <!-- =====================================================
-       JAVASCRIPT
-  ====================================================== -->
+
+  <footer class="pie-sistema">
+
+    <div class="pie-marca">
+
+      <img
+        src="img/logo-biofar.png"
+        alt="Farmacia Biofar"
+      />
+
+      <span>
+        Cuidamos de ti
+      </span>
+
+    </div>
+
+
+    <div>
+      Sistema de Fidelización · Farmacia Biofar
+    </div>
+
+  </footer>
+
+
 
   <script src="js/api.js"></script>
   <script src="js/premios.js"></script>
 
 </body>
+
 </html>

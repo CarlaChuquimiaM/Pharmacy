@@ -1,29 +1,112 @@
 <!DOCTYPE html>
+
 <html lang="es">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Farmacia — Iniciar sesión</title>
-  <link rel="stylesheet" href="css/estilo.css" />
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Biofar — Iniciar sesión
+  </title>
+
+  <link
+    rel="stylesheet"
+    href="css/estilo.css"
+  >
+
 </head>
+
+
 <body>
-  <div class="pantalla-login">
-    <div class="tarjeta-login">
-      <h1>Sistema de Farmacia</h1>
-      <form id="form-login">
-        <label for="username">Usuario</label>
-        <input type="text" id="username" autocomplete="username" required />
 
-        <label for="password">Contraseña</label>
-        <input type="password" id="password" autocomplete="current-password" required />
 
-        <button type="submit" class="boton-primario">Ingresar</button>
-        <div class="mensaje-error" id="error-login"></div>
-      </form>
+<div class="pantalla-login">
+
+
+  <div class="tarjeta-login">
+
+
+    <img
+      src="img/logo-biofar.png"
+      alt="Farmacia Biofar"
+      class="login-logo"
+    >
+
+
+    <h1>
+      Sistema de Fidelización
+    </h1>
+
+
+    <div class="login-subtitulo">
+      Cuidamos de ti
     </div>
+
+
+    <form id="form-login">
+
+
+      <label for="username">
+        Usuario
+      </label>
+
+
+      <input
+        type="text"
+        id="username"
+        autocomplete="username"
+        placeholder="Ingresa tu usuario"
+        required
+      >
+
+
+      <label for="password">
+        Contraseña
+      </label>
+
+
+      <input
+        type="password"
+        id="password"
+        autocomplete="current-password"
+        placeholder="Ingresa tu contraseña"
+        required
+      >
+
+
+      <button
+        type="submit"
+        class="boton-primario"
+        style="width:100%; margin-top:22px;"
+      >
+        Ingresar al sistema
+      </button>
+
+
+      <div
+        class="mensaje-error"
+        id="error-login"
+      ></div>
+
+
+    </form>
+
   </div>
 
-  <script src="js/api.js"></script>
-  <script src="js/auth.js"></script>
+</div>
+
+
+<script src="js/api.js"></script>
+
+<script src="js/auth.js"></script>
+
+
 </body>
+
 </html>

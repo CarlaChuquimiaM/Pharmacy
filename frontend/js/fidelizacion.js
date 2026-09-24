@@ -268,78 +268,308 @@ async function mostrarDetalleCliente(clienteId) {
 // ======================================================
 
 function cargarHistorial(historial) {
-  const cuerpoHistorial = document.getElementById(
-    "cuerpo-historial"
-  );
 
-  if (!cuerpoHistorial) return;
+  const cuerpoHistorial =
+    document.getElementById(
+      "cuerpo-historial"
+    );
+
+
+  if (!cuerpoHistorial) {
+    return;
+  }
+
 
   cuerpoHistorial.innerHTML = "";
 
+
+  // =========================================
+  // SIN MOVIMIENTOS
+  // =========================================
+
   if (!historial || historial.length === 0) {
-    const fila = document.createElement("tr");
+
+    const fila =
+      document.createElement("tr");
+
 
     fila.innerHTML = `
+
       <td colspan="5">
-        No hay movimientos registrados todavía.
+
+        <div class="historial-vacio">
+
+          <div class="historial-vacio-icono">
+            ◷
+          </div>
+
+          <div>
+
+            <strong>
+              Sin movimientos
+            </strong>
+
+            <span>
+              Este cliente todavía no tiene actividad registrada.
+            </span>
+
+          </div>
+
+        </div>
+
       </td>
+
     `;
 
-    cuerpoHistorial.appendChild(fila);
+
+    cuerpoHistorial.appendChild(
+      fila
+    );
+
 
     return;
   }
 
+
+
+  // =========================================
+  // MOVIMIENTOS
+  // =========================================
+
   historial.forEach((movimiento) => {
-    const fila = document.createElement("tr");
+
+
+    const fila =
+      document.createElement("tr");
+
+
+    fila.classList.add(
+      "fila-movimiento"
+    );
+
+
+    // -----------------------------------------
+    // CONFIGURACIÓN VISUAL SEGÚN TIPO
+    // -----------------------------------------
+
+    let tipoTexto = "";
+    let tituloMovimiento = "";
+    let iconoMovimiento = "";
+    let claseMovimiento = "";
+
+
+    if (movimiento.tipo === "acumulado") {
+
+      tipoTexto = "Compra";
+
+      tituloMovimiento =
+        "Compra registrada";
+
+      iconoMovimiento =
+        "+";
+
+      claseMovimiento =
+        "movimiento-acumulado";
+
+    }
+
+
+    else if (
+      movimiento.tipo === "canjeado"
+    ) {
+
+      tipoTexto = "Canje";
+
+      tituloMovimiento =
+        "Canje de premio";
+
+      iconoMovimiento =
+        "🎁";
+
+      claseMovimiento =
+        "movimiento-canjeado";
+
+    }
+
+
+    else {
+
+      tipoTexto =
+        movimiento.tipo || "Movimiento";
+
+      tituloMovimiento =
+        movimiento.tipo || "Movimiento";
+
+      iconoMovimiento =
+        "•";
+
+      claseMovimiento =
+        "movimiento-general";
+
+    }
+
+
+    fila.classList.add(
+      claseMovimiento
+    );
+
+
+    // -----------------------------------------
+    // DETALLE
+    // -----------------------------------------
 
     let detalle = "";
 
-    if (movimiento.tipo === "acumulado") {
-      detalle = `Compra de Bs ${Number(
-        movimiento.monto_compra || 0
-      ).toFixed(2)}`;
-    } else {
-      detalle = movimiento.nota || "Canje de premio";
+
+    if (
+      movimiento.tipo === "acumulado"
+    ) {
+
+      detalle =
+        `Compra de Bs ${Number(
+          movimiento.monto_compra || 0
+        ).toFixed(2)}`;
+
     }
 
-    const tipoTexto =
-      movimiento.tipo === "acumulado"
-        ? "Sumó"
-        : movimiento.tipo === "canjeado"
-        ? "Canjeó"
-        : movimiento.tipo;
+    else {
+
+      detalle =
+        movimiento.nota ||
+        "Canje de premio";
+
+    }
+
+
+    // -----------------------------------------
+    // PUNTOS
+    // -----------------------------------------
+
+    const puntos =
+      Number(
+        movimiento.puntos || 0
+      );
+
+
+    const clasePuntos =
+      puntos >= 0
+        ? "puntos-positivos"
+        : "puntos-negativos";
+
+
+    const signo =
+      puntos > 0
+        ? "+"
+        : "";
+
+
+    // -----------------------------------------
+    // HTML
+    // -----------------------------------------
 
     fila.innerHTML = `
-      <td>
-        ${escaparHTML(formatearFecha(movimiento.fecha))}
-      </td>
 
       <td>
-        ${escaparHTML(tipoTexto)}
+
+        <div class="movimiento-principal">
+
+          <div class="movimiento-icono">
+
+            ${iconoMovimiento}
+
+          </div>
+
+
+          <div>
+
+            <div class="movimiento-titulo">
+
+              ${escaparHTML(
+                tituloMovimiento
+              )}
+
+            </div>
+
+
+            <div class="movimiento-tipo">
+
+              ${escaparHTML(
+                tipoTexto
+              )}
+
+            </div>
+
+          </div>
+
+        </div>
+
       </td>
 
-      <td>
-        ${
-          movimiento.puntos > 0
-            ? "+"
-            : ""
-        }${escaparHTML(movimiento.puntos)}
-      </td>
 
       <td>
-        ${escaparHTML(detalle)}
+
+        <span class="movimiento-detalle">
+
+          ${escaparHTML(
+            detalle
+          )}
+
+        </span>
+
       </td>
 
+
       <td>
-        ${escaparHTML(movimiento.usuario || "")}
+
+        <span class="movimiento-cajero">
+
+          ${escaparHTML(
+            movimiento.usuario || "-"
+          )}
+
+        </span>
+
       </td>
+
+
+      <td>
+
+        <span class="movimiento-fecha">
+
+          ${escaparHTML(
+            formatearFecha(
+              movimiento.fecha
+            )
+          )}
+
+        </span>
+
+      </td>
+
+
+      <td class="movimiento-puntos-columna">
+
+        <span class="${clasePuntos}">
+
+          ${signo}${escaparHTML(
+            movimiento.puntos
+          )}
+
+        </span>
+
+      </td>
+
     `;
 
-    cuerpoHistorial.appendChild(fila);
-  });
-}
 
+    cuerpoHistorial.appendChild(
+      fila
+    );
+
+
+  });
+
+}
 
 // ======================================================
 // REGISTRAR CLIENTE NUEVO

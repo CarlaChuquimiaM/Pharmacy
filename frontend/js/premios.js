@@ -225,138 +225,225 @@ async function cargarPremios(){
 // MOSTRAR PREMIOS
 // ======================================================
 
-function mostrarPremios(premios){
+function mostrarPremios(premios) {
+
+  listaPremiosAdmin.innerHTML = "";
 
 
-  listaPremiosAdmin.innerHTML="";
+  if (!premios || premios.length === 0) {
 
+    listaPremiosAdmin.innerHTML = `
+      <div class="estado-vacio-premios">
 
-  if(!premios || premios.length===0){
+        <div class="estado-vacio-premios-icono">
+          🎁
+        </div>
 
-    listaPremiosAdmin.innerHTML =
-    `
-    <p>No hay premios creados todavía.</p>
+        <h3>
+          Todavía no hay premios
+        </h3>
+
+        <p>
+          Crea tu primer premio para comenzar
+          a construir el catálogo Biofar.
+        </p>
+
+      </div>
     `;
 
     return;
   }
 
 
-
-  premios.forEach((premio)=>{
-
+  premios.forEach((premio) => {
 
     const tarjeta =
-    document.createElement(
-      "div"
-    );
+      document.createElement("article");
 
 
     tarjeta.className =
-    "premio-card";
+      "premio-admin-card";
 
 
-
-    tarjeta.innerHTML =
-    `
-
-    ${
-      premio.imagen_url
-      ?
-      `
-      <img
-      src="${premio.imagen_url}"
-      style="
-      width:100%;
-      height:180px;
-      object-fit:cover;
-      border-radius:12px 12px 0 0;
-      "
-      >
-      `
-      :
-      ""
-    }
+    const nombre =
+      escaparHTML(premio.nombre);
 
 
-    <div class="premio-contenido">
+    const descripcion =
+      escaparHTML(
+        premio.descripcion || "Sin descripción"
+      );
 
 
-      <h3>
-      ${escaparHTML(premio.nombre)}
-      </h3>
+    const puntos =
+      Number(premio.puntos_requeridos || 0);
 
 
-      ${
-        premio.descripcion
-        ?
-        `
-        <p>
-        ${escaparHTML(premio.descripcion)}
-        </p>
-        `
-        :
-        ""
-      }
+    const stock =
+      Number(premio.stock || 0);
 
 
-      <p>
-      <strong>
-      ${premio.puntos_requeridos} puntos
-      </strong>
-      </p>
+    const stockClase =
+      stock > 0
+        ? "stock-disponible"
+        : "stock-agotado";
 
 
-      <p>
-      Stock:
-      ${premio.stock}
-      </p>
+    const stockTexto =
+      stock > 0
+        ? `En stock (${stock})`
+        : "Sin stock";
 
 
+    tarjeta.innerHTML = `
 
-      <div style="display:flex;gap:10px;">
+      <div class="premio-admin-imagen">
 
+        ${
+          premio.imagen_url
+            ?
+            `
+              <img
+                src="${premio.imagen_url}"
+                alt="${nombre}"
+              >
+            `
+            :
+            `
+              <div class="premio-admin-sin-imagen">
 
-      <button
-      class="boton-primario boton-editar-premio"
-      data-id="${premio.id}"
-      >
-      Editar
-      </button>
+                <span>
+                  🎁
+                </span>
 
+                <small>
+                  Sin imagen
+                </small>
 
-
-      <button
-      class="boton-rojo boton-desactivar-premio"
-      data-id="${premio.id}"
-      data-nombre="${escaparHTML(premio.nombre)}"
-      >
-      Desactivar
-      </button>
-
+              </div>
+            `
+        }
 
       </div>
 
 
-    </div>
+      <div class="premio-admin-contenido">
+
+
+        <div class="premio-admin-superior">
+
+          <span class="premio-etiqueta">
+            Premio Biofar
+          </span>
+
+          <span class="${stockClase}">
+            ${stockTexto}
+          </span>
+
+        </div>
+
+
+        <h3>
+          ${nombre}
+        </h3>
+
+
+        <p class="premio-admin-descripcion">
+          ${descripcion}
+        </p>
+
+
+        <div class="premio-admin-puntos">
+
+          <span class="estrella-puntos">
+            ★
+          </span>
+
+          <strong>
+            ${puntos.toLocaleString("es-BO")}
+          </strong>
+
+          <span>
+            puntos
+          </span>
+
+        </div>
+
+
+        <div class="premio-admin-detalles">
+
+          <div>
+
+            <span class="detalle-label">
+              Requerimiento
+            </span>
+
+            <strong>
+              ${puntos.toLocaleString("es-BO")} pts
+            </strong>
+
+          </div>
+
+
+          <div>
+
+            <span class="detalle-label">
+              Unidades
+            </span>
+
+            <strong>
+              ${stock}
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <div class="premio-admin-acciones">
+
+          <button
+            type="button"
+            class="
+              boton-secundario
+              boton-editar-premio
+            "
+            data-id="${premio.id}"
+          >
+            ✎ Editar
+          </button>
+
+
+          <button
+            type="button"
+            class="
+              boton-desactivar-premio
+              boton-desactivar-biofar
+            "
+            data-id="${premio.id}"
+            data-nombre="${nombre}"
+          >
+            Desactivar
+          </button>
+
+        </div>
+
+
+      </div>
 
     `;
-
 
 
     listaPremiosAdmin.appendChild(
       tarjeta
     );
 
-
   });
-
 
 
   activarBotonesPremios();
 
 }
-
 
 
 // ======================================================
