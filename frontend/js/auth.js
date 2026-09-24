@@ -10,11 +10,13 @@ if (formLogin) {
     elementoError.textContent = "";
 
     try {
-      await apiFetch("/auth/login", {
+      const usuario = await apiFetch("/auth/login", {
         method: "POST",
         body: { username, password },
       });
-      window.location.href = "fidelizacion.html";
+      window.location.href = usuario.debe_cambiar_password
+        ? "cambiar-password.html"
+        : "fidelizacion.html";
     } catch (error) {
       elementoError.textContent = error.message;
     }

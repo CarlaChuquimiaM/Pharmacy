@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>Biofar — Clientes</title>
+
+  <link
+    rel="stylesheet"
+    href="css/estilo.css"
+  />
+
+</head>
+
+
+<body>
+
+<div class="layout-app">
+
+  <aside class="sidebar" id="sidebar"></aside>
+
+  <div class="area-contenido">
+
+  <main>
+
+
+    <!-- =====================================================
+         ENCABEZADO DE PÁGINA
+    ====================================================== -->
+
+    <section class="cabecera-pagina-premios">
+
+      <div>
+
+        <span class="etiqueta-seccion">
+          Directorio Biofar
+        </span>
+
+        <h1>
+          Clientes
+        </h1>
+
+        <p>
+          Consulta, registra y actualiza los datos de los clientes
+          del programa de fidelización.
+        </p>
+
+      </div>
+
+      <div class="icono-grande-premios">
+        🧑‍🤝‍🧑
+      </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         REGISTRAR CLIENTE
+    ====================================================== -->
+
+    <section class="panel panel-crear-usuario">
+
+      <div class="titulo-seccion">
+
+        <div class="icono-seccion">
+          +
+        </div>
+
+        <div>
+          <h2>Registrar cliente</h2>
+          <p>Un cliente nuevo empieza siempre con 0 puntos.</p>
+        </div>
+
+      </div>
+
+
+      <div class="formulario-grid-3">
+
+        <div>
+          <label for="cliente-tipo-documento">Tipo de documento</label>
+          <select id="cliente-tipo-documento">
+            <option value="CI">CI</option>
+            <option value="NIT">NIT</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="cliente-numero-documento">Número de documento</label>
+          <input type="text" id="cliente-numero-documento" placeholder="Ej: 1234567" autocomplete="off" />
+        </div>
+
+        <div>
+          <label for="cliente-nombre">Nombre</label>
+          <input type="text" id="cliente-nombre" placeholder="Ej: Juan" autocomplete="off" />
+        </div>
+
+        <div>
+          <label for="cliente-apellido">Apellido</label>
+          <input type="text" id="cliente-apellido" placeholder="Ej: Pérez" autocomplete="off" />
+        </div>
+
+        <div>
+          <label for="cliente-telefono">Teléfono</label>
+          <input type="text" id="cliente-telefono" placeholder="Ej: 70000000" autocomplete="off" />
+        </div>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="boton-primario"
+        id="boton-crear-cliente"
+        style="margin-top:18px;"
+      >
+        + Registrar cliente
+      </button>
+
+      <div class="mensaje-error" id="error-crear-cliente"></div>
+      <div class="mensaje-exito" id="exito-crear-cliente"></div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         EDITAR CLIENTE
+    ====================================================== -->
+
+    <section class="panel panel-crear-usuario oculto" id="panel-editar-cliente">
+
+      <div class="titulo-seccion">
+
+        <div class="icono-seccion">
+          ✎
+        </div>
+
+        <div>
+          <h2>Editar cliente</h2>
+          <p>Actualiza los datos de contacto del cliente seleccionado.</p>
+        </div>
+
+      </div>
+
+      <input type="hidden" id="editar-cliente-id" />
+
+      <div class="formulario-grid-3">
+
+        <div>
+          <label for="editar-cliente-tipo-documento">Tipo de documento</label>
+          <select id="editar-cliente-tipo-documento">
+            <option value="CI">CI</option>
+            <option value="NIT">NIT</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="editar-cliente-numero-documento">Número de documento</label>
+          <input type="text" id="editar-cliente-numero-documento" />
+        </div>
+
+        <div>
+          <label for="editar-cliente-nombre">Nombre</label>
+          <input type="text" id="editar-cliente-nombre" />
+        </div>
+
+        <div>
+          <label for="editar-cliente-apellido">Apellido</label>
+          <input type="text" id="editar-cliente-apellido" />
+        </div>
+
+        <div>
+          <label for="editar-cliente-telefono">Teléfono</label>
+          <input type="text" id="editar-cliente-telefono" />
+        </div>
+
+      </div>
+
+      <div class="acciones-edicion" style="margin-top:18px;">
+        <button type="button" class="boton-primario" id="boton-guardar-cliente">
+          Guardar cambios
+        </button>
+
+        <button type="button" class="boton-secundario" id="boton-cancelar-editar-cliente">
+          Cancelar
+        </button>
+      </div>
+
+      <div class="mensaje-error" id="error-editar-cliente"></div>
+      <div class="mensaje-exito" id="exito-editar-cliente"></div>
+
+
+      <!-- HISTORIAL DEL CLIENTE EN EDICIÓN -->
+
+      <div class="subseccion">
+
+        <div class="subseccion-titulo">
+          <h3>Historial de compras</h3>
+        </div>
+
+        <div class="tabla-contenedor">
+          <table>
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Método de pago</th>
+                <th>Productos</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody id="cuerpo-compras-cliente"></tbody>
+          </table>
+        </div>
+
+      </div>
+
+      <div class="subseccion">
+
+        <div class="subseccion-titulo">
+          <h3>Historial de puntos</h3>
+        </div>
+
+        <div class="tabla-contenedor">
+          <table>
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Tipo</th>
+                <th>Puntos</th>
+                <th>Nota</th>
+              </tr>
+            </thead>
+            <tbody id="cuerpo-puntos-cliente"></tbody>
+          </table>
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         LISTADO DE CLIENTES
+    ====================================================== -->
+
+    <section class="panel panel-usuarios-sistema">
+
+      <div class="cabecera-listado-usuarios">
+
+        <div>
+
+          <div class="titulo-bloque">
+            <div class="icono-mini">🧑‍🤝‍🧑</div>
+            <h2>Clientes registrados</h2>
+          </div>
+
+          <p class="texto-ayuda">
+            Busca por nombre, apellido o número de documento.
+          </p>
+
+        </div>
+
+        <div style="min-width:240px;">
+          <input
+            type="text"
+            id="buscar-cliente"
+            placeholder="Buscar cliente..."
+            autocomplete="off"
+          />
+        </div>
+
+      </div>
+
+
+      <div class="tabla-usuarios-contenedor">
+
+        <table class="tabla-usuarios">
+
+          <thead>
+            <tr>
+              <th>Cliente</th>
+              <th>Documento</th>
+              <th>Teléfono</th>
+              <th>Puntos</th>
+              <th class="columna-acciones">Acciones</th>
+            </tr>
+          </thead>
+
+          <tbody id="cuerpo-clientes"></tbody>
+
+        </table>
+
+      </div>
+
+    </section>
+
+
+  </main>
+
+
+
+  <footer class="pie-sistema">
+
+    <div class="pie-marca">
+      <img src="img/logo-biofar.png" alt="Farmacia Biofar" />
+      <span>Cuidamos de ti</span>
+    </div>
+
+    <div>
+      Sistema de Fidelización · Farmacia Biofar
+    </div>
+
+  </footer>
+
+  </div>
+
+</div>
+
+
+  <script src="js/api.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/clientes.js"></script>
+  <script>cargarSidebar("clientes");</script>
+
+</body>
+
+</html>

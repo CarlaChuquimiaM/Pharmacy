@@ -7,6 +7,9 @@ Guía rápida para el día a día en el mostrador. Para instalar el sistema, ver
 1. Abrir el navegador (Chrome, Edge, etc.).
 2. Ir a la dirección que indicó quien instaló el sistema (por ejemplo `http://192.168.1.5:8000`, o `http://localhost:8000` si es la misma PC donde corre el sistema).
 3. Escribir tu usuario y contraseña, y presionar **Ingresar**.
+4. Si es tu primera vez con ese usuario (o el administrador te reseteó la contraseña), el sistema te va a pedir que definas una contraseña nueva antes de dejarte hacer cualquier otra cosa. Escribe la que te dieron, tu nueva contraseña, repítela, y guarda.
+
+La sesión se cierra sola después de 20 minutos sin usar el sistema, por seguridad — si pasa eso, simplemente vuelve a ingresar.
 
 ## Sumar puntos a un cliente por una compra
 
@@ -39,3 +42,4 @@ Arriba a la derecha, botón **Salir**. Hacerlo si la PC queda sin nadie a cargo 
 - Si el navegador no carga la página, avisar a quien instaló el sistema — puede que el servidor esté apagado.
 - Si dice "usuario o contraseña incorrectos", revisar que estén bien escritos (las mayúsculas no importan, pero ojo con espacios de más).
 - Si tu usuario aparece como inhabilitado, solo el administrador te lo puede volver a habilitar desde "Usuarios".
+- Si olvidaste tu contraseña, pide al administrador que te la resetee desde "Usuarios" — vas a tener que definir una nueva en tu próximo ingreso.

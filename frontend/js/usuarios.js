@@ -15,11 +15,20 @@ async function cargarUsuarios() {
       `;
 
       const celdaAccion = fila.querySelector("td:last-child");
+      celdaAccion.style.display = "flex";
+      celdaAccion.style.gap = "6px";
+
       const boton = document.createElement("button");
       boton.className = usuario.activo ? "boton-rojo" : "boton-verde";
       boton.textContent = usuario.activo ? "Inhabilitar" : "Habilitar";
       boton.addEventListener("click", () => cambiarEstadoUsuario(usuario.id, !usuario.activo));
       celdaAccion.appendChild(boton);
+
+      const botonReset = document.createElement("button");
+      botonReset.className = "boton-secundario";
+      botonReset.textContent = "Resetear contraseña";
+      botonReset.addEventListener("click", () => resetearPassword(usuario.id, usuario.username));
+      celdaAccion.appendChild(botonReset);
 
       cuerpo.appendChild(fila);
     });
@@ -33,6 +42,26 @@ async function cambiarEstadoUsuario(usuarioId, nuevoEstado) {
     method: "PATCH",
     body: { activo: nuevoEstado },
   });
+  await cargarUsuarios();
+}
+
+async function resetearPassword(usuarioId, username) {
+  const nuevaClave = prompt(
+    `Nueva contraseña temporal para "${username}" (mínimo 6 caracteres).\nLa persona deberá cambiarla en su próximo ingreso.`
+  );
+
+  if (!nuevaClave) return;
+
+  if (nuevaClave.length < 6) {
+    alert("La contraseña debe tener al menos 6 caracteres");
+    return;
+  }
+
+  await apiFetch(`/auth/usuarios/${usuarioId}`, {
+    method: "PATCH",
+    body: { password: nuevaClave },
+  });
+  alert("Contraseña reseteada. Compártela con el usuario de forma segura.");
   await cargarUsuarios();
 }
 

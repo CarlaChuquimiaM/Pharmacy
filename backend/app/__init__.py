@@ -1,10 +1,12 @@
+from datetime import timedelta
 from pathlib import Path
 
-from flask import Flask, send_from_directory
+from flask import Flask, jsonify, request, send_from_directory
+from flask_login import current_user
 from sqlalchemy import text
 
 from .extensions import db, login_manager
-from .models import Usuario
+from .models import MetodoPago, Usuario
 
 
 FRONTEND_DIR = (
@@ -21,13 +23,23 @@ DB_PATH = (
 UPLOADS_DIR = Path(__file__).resolve().parent.parent / "uploads"
 PREMIOS_UPLOAD_DIR = UPLOADS_DIR / "premios"
 
+# Tiempo de inactividad antes de que la sesión se cierre sola.
+DURACION_SESION = timedelta(minutes=20)
+
+# Rutas de /api que se pueden usar aunque el usuario todavía deba cambiar su contraseña.
+RUTAS_LIBRES_CAMBIO_PASSWORD = {
+    "/api/auth/login",
+    "/api/auth/logout",
+    "/api/auth/me",
+    "/api/auth/cambiar-password",
+}
+
 
 def create_app():
-    
-    app = Flask(
-        __name__,
-        static_folder=None
-    )
+    app = Flask(__name__, static_folder=None)
+    app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{DB_PATH}"
+    app.config["SECRET_KEY"] = "cambiar-esta-clave-en-produccion"
+    app.config["PERMANENT_SESSION_LIFETIME"] = DURACION_SESION
 
     app.config[
         "SQLALCHEMY_DATABASE_URI"
@@ -82,8 +94,26 @@ def create_app():
     # BLUEPRINTS
     # ==================================================
 
+    @app.before_request
+    def exigir_cambio_password():
+        if not request.path.startswith("/api/"):
+            return None
+        if request.path in RUTAS_LIBRES_CAMBIO_PASSWORD:
+            return None
+        if current_user.is_authenticated and current_user.debe_cambiar_password:
+            return jsonify(
+                {
+                    "error": "Debes cambiar tu contraseña antes de continuar",
+                    "debe_cambiar_password": True,
+                }
+            ), 403
+        return None
+
     from .auth.routes import auth_bp
     from .fidelizacion.routes import fidelizacion_bp
+    from .productos.routes import productos_bp
+    from .ventas.routes import ventas_bp
+    from .reportes.routes import reportes_bp
 
     app.register_blueprint(
         auth_bp,
@@ -93,6 +123,21 @@ def create_app():
     app.register_blueprint(
         fidelizacion_bp,
         url_prefix="/api/fidelizacion"
+    )
+
+    app.register_blueprint(
+        productos_bp,
+        url_prefix="/api/productos"
+    )
+
+    app.register_blueprint(
+        ventas_bp,
+        url_prefix="/api/ventas"
+    )
+
+    app.register_blueprint(
+        reportes_bp,
+        url_prefix="/api/reportes"
     )
 
 
@@ -133,6 +178,44 @@ def create_app():
 
 
         # ----------------------------------------------
+        # MIGRACIÓN LIGERA: columnas nuevas en tablas ya existentes
+        # (no hay Alembic; create_all() no altera tablas existentes)
+        # ----------------------------------------------
+
+        with db.engine.connect() as conexion:
+            columnas_usuarios = [
+                fila[1]
+                for fila in conexion.execute(
+                    text("PRAGMA table_info(usuarios)")
+                )
+            ]
+
+            if columnas_usuarios and "debe_cambiar_password" not in columnas_usuarios:
+                conexion.execute(
+                    text(
+                        "ALTER TABLE usuarios ADD COLUMN "
+                        "debe_cambiar_password BOOLEAN NOT NULL DEFAULT 0"
+                    )
+                )
+                conexion.commit()
+
+            columnas_movimientos = [
+                fila[1]
+                for fila in conexion.execute(
+                    text("PRAGMA table_info(movimientos_puntos)")
+                )
+            ]
+
+            if columnas_movimientos and "venta_id" not in columnas_movimientos:
+                conexion.execute(
+                    text(
+                        "ALTER TABLE movimientos_puntos ADD COLUMN venta_id INTEGER"
+                    )
+                )
+                conexion.commit()
+
+
+        # ----------------------------------------------
         # CREAR ADMIN INICIAL
         # ----------------------------------------------
 
@@ -157,6 +240,19 @@ def create_app():
 
             print(
                 "Usuario administrador inicial creado."
+            )
+
+
+        # ----------------------------------------------
+        # MÉTODO DE PAGO POR DEFECTO
+        # ----------------------------------------------
+
+        if MetodoPago.query.first() is None:
+            db.session.add(MetodoPago(nombre="Efectivo"))
+            db.session.commit()
+
+            print(
+                "Método de pago inicial (Efectivo) creado."
             )
 
 

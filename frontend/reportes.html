@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>Biofar — Reportes</title>
+
+  <link
+    rel="stylesheet"
+    href="css/estilo.css"
+  />
+
+</head>
+
+
+<body>
+
+<div class="layout-app">
+
+  <aside class="sidebar" id="sidebar"></aside>
+
+  <div class="area-contenido">
+
+  <main>
+
+
+    <!-- =====================================================
+         ENCABEZADO DE PÁGINA
+    ====================================================== -->
+
+    <section class="cabecera-pagina-premios">
+
+      <div>
+
+        <span class="etiqueta-seccion">
+          Panorama Biofar
+        </span>
+
+        <h1>
+          Reportes
+        </h1>
+
+        <p>
+          Resumen de ventas, inventario y fidelización de la farmacia.
+        </p>
+
+      </div>
+
+      <div class="icono-grande-premios">
+        📊
+      </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         VENTAS POR PERÍODO
+    ====================================================== -->
+
+    <section class="grid-periodos-reportes">
+
+      <div class="panel panel-periodo">
+        <h3>Hoy</h3>
+        <div class="fila-metricas">
+          <div>
+            <div class="tarjeta-alerta-numero" id="hoy-cantidad">0</div>
+            <div class="tarjeta-alerta-texto">Ventas</div>
+          </div>
+          <div>
+            <div class="tarjeta-alerta-numero" id="hoy-total">Bs 0.00</div>
+            <div class="tarjeta-alerta-texto">Total vendido</div>
+          </div>
+          <div>
+            <div class="tarjeta-alerta-numero" id="hoy-ganancia">Bs 0.00</div>
+            <div class="tarjeta-alerta-texto">Ganancia</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel panel-periodo">
+        <h3>Últimos 7 días</h3>
+        <div class="fila-metricas">
+          <div>
+            <div class="tarjeta-alerta-numero" id="semana-cantidad">0</div>
+            <div class="tarjeta-alerta-texto">Ventas</div>
+          </div>
+          <div>
+            <div class="tarjeta-alerta-numero" id="semana-total">Bs 0.00</div>
+            <div class="tarjeta-alerta-texto">Total vendido</div>
+          </div>
+          <div>
+            <div class="tarjeta-alerta-numero" id="semana-ganancia">Bs 0.00</div>
+            <div class="tarjeta-alerta-texto">Ganancia</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel panel-periodo">
+        <h3>Últimos 30 días</h3>
+        <div class="fila-metricas">
+          <div>
+            <div class="tarjeta-alerta-numero" id="mes-cantidad">0</div>
+            <div class="tarjeta-alerta-texto">Ventas</div>
+          </div>
+          <div>
+            <div class="tarjeta-alerta-numero" id="mes-total">Bs 0.00</div>
+            <div class="tarjeta-alerta-texto">Total vendido</div>
+          </div>
+          <div>
+            <div class="tarjeta-alerta-numero" id="mes-ganancia">Bs 0.00</div>
+            <div class="tarjeta-alerta-texto">Ganancia</div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         ALERTAS DE INVENTARIO
+    ====================================================== -->
+
+    <section class="resumen-alertas-productos">
+
+      <div class="tarjeta-alerta tarjeta-alerta-stock">
+        <div class="tarjeta-alerta-icono">⚠️</div>
+        <div>
+          <div class="tarjeta-alerta-numero" id="inventario-stock-bajo">0</div>
+          <div class="tarjeta-alerta-texto">Productos con stock bajo</div>
+        </div>
+      </div>
+
+      <div class="tarjeta-alerta tarjeta-alerta-vencidos">
+        <div class="tarjeta-alerta-icono">⛔</div>
+        <div>
+          <div class="tarjeta-alerta-numero" id="inventario-vencidos">0</div>
+          <div class="tarjeta-alerta-texto">Productos vencidos</div>
+        </div>
+      </div>
+
+      <div class="tarjeta-alerta tarjeta-alerta-por-vencer">
+        <div class="tarjeta-alerta-icono">⏳</div>
+        <div>
+          <div class="tarjeta-alerta-numero" id="inventario-por-vencer">0</div>
+          <div class="tarjeta-alerta-texto">Por vencer (30 días)</div>
+        </div>
+      </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         TOP PRODUCTOS Y MÉTODOS DE PAGO
+    ====================================================== -->
+
+    <section class="grid-reportes-dos-columnas">
+
+      <div class="panel">
+
+        <div class="titulo-seccion">
+          <div class="icono-seccion">🏆</div>
+          <div>
+            <h2>Productos más vendidos</h2>
+            <p>Últimos 30 días, por cantidad.</p>
+          </div>
+        </div>
+
+        <div class="tabla-contenedor">
+          <table>
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Total vendido</th>
+              </tr>
+            </thead>
+            <tbody id="cuerpo-top-productos"></tbody>
+          </table>
+        </div>
+
+      </div>
+
+
+      <div class="panel">
+
+        <div class="titulo-seccion">
+          <div class="icono-seccion">💳</div>
+          <div>
+            <h2>Ventas por método de pago</h2>
+            <p>Últimos 30 días.</p>
+          </div>
+        </div>
+
+        <div class="tabla-contenedor">
+          <table>
+            <thead>
+              <tr>
+                <th>Método</th>
+                <th>Ventas</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody id="cuerpo-metodos-pago"></tbody>
+          </table>
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         FIDELIZACIÓN
+    ====================================================== -->
+
+    <section class="grid-reportes-dos-columnas" style="margin-top:22px;">
+
+      <div class="panel">
+
+        <div class="titulo-seccion">
+          <div class="icono-seccion">🎯</div>
+          <div>
+            <h2>Fidelización</h2>
+            <p>Estado general del programa de puntos.</p>
+          </div>
+        </div>
+
+        <div class="fila-metricas">
+          <div>
+            <div class="tarjeta-alerta-numero" id="fidelizacion-clientes">0</div>
+            <div class="tarjeta-alerta-texto">Clientes registrados</div>
+          </div>
+          <div>
+            <div class="tarjeta-alerta-numero" id="fidelizacion-acumulados">0</div>
+            <div class="tarjeta-alerta-texto">Puntos acumulados</div>
+          </div>
+          <div>
+            <div class="tarjeta-alerta-numero" id="fidelizacion-canjeados">0</div>
+            <div class="tarjeta-alerta-texto">Puntos canjeados</div>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="panel">
+
+        <div class="titulo-seccion">
+          <div class="icono-seccion">⭐</div>
+          <div>
+            <h2>Top clientes</h2>
+            <p>Los que más puntos acumulan actualmente.</p>
+          </div>
+        </div>
+
+        <div class="ranking-lista" id="ranking-clientes"></div>
+
+      </div>
+
+    </section>
+
+
+  </main>
+
+
+
+  <footer class="pie-sistema">
+
+    <div class="pie-marca">
+      <img src="img/logo-biofar.png" alt="Farmacia Biofar" />
+      <span>Cuidamos de ti</span>
+    </div>
+
+    <div>
+      Sistema de Fidelización · Farmacia Biofar
+    </div>
+
+  </footer>
+
+  </div>
+
+</div>
+
+
+  <script src="js/api.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/reportes.js"></script>
+  <script>cargarSidebar("reportes");</script>
+
+</body>
+
+</html>
